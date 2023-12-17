@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [bio, setBio] = useState('');
+  const [socialMedia, setSocialMedia] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -51,42 +54,38 @@ function RegisterForm() {
           />
         </label>
       </div>
-      <div>
-        <label htmlFor="password">
-          Password:
+      {/* <div>
+        <label htmlFor="bio">
+          Add a Bio *Not Required*:
           <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
+            type="text"
+            name="bio"
+            value={bio}
+            onChange={(event) => setBio(event.target.value)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
+        <label htmlFor="social-media">
+          Add a Link to a Social Media account *Not Required*:
           <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
+            type="text"
+            name="social-media"
+            value={socialMedia}
+            onChange={(event) => setSocialMedia(event.target.value)}
           />
         </label>
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
+        <label htmlFor="profile-picture">
+          Upload a Profile Picture *Not Required*:
           <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
+            type="file"
+            name="profile-picture"
+            onChange={(event) => setProfilePicture(event.target.files[0])}
           />
         </label>
-      </div>
+      </div> */}
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
