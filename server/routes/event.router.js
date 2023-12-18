@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/id/:id', (req, res) => {
     const query = `
       SELECT * FROM "events"
       WHERE "id" = $1;
@@ -18,6 +18,24 @@ router.get('/:id', (req, res) => {
       })
       .catch(err => {
         console.log('Error in event router GET by ID:', err);
+        res.sendStatus(500)
+      })
+  });
+
+  router.get('/created', (req, res) => {
+    const query = `
+        SELECT * FROM "events"
+        WHERE "creator_id" = $1
+        ORDER BY "id" DESC
+        LIMIT 1;
+    `;
+    pool.query(query, [req.user.id])
+      .then(result => {
+        res.send(result.rows);
+        console.log("this is the recently created event", result.rows);
+      })
+      .catch(err => {
+        console.log('Error in event router GET created:', err);
         res.sendStatus(500)
       })
   });

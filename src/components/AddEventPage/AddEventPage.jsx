@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function AddEventPage (){
 
@@ -12,12 +13,14 @@ function AddEventPage (){
   const [cityState, setCityState] = useState('');
   const eventForm = new FormData ();
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     dispatch({
       type: "SAGA/GET_GENRES"
     })
   }, [])
   const genres = useSelector(store => store.genres)
+  const currentEvent = useSelector(store => store.currentEvent)
 
   const addEvent = (event) => {
     event.preventDefault();
@@ -32,6 +35,14 @@ function AddEventPage (){
       type: 'SAGA/ADD_EVENT',
       payload: eventForm
     });
+    setImgUpload('');
+    setEventName('');
+    setEventBio('');
+    setEventTime('');
+    setVenue('');
+    setCityState('');
+    setSelectedGenre('');
+    history.push('/event/created');
   };
 
     return (

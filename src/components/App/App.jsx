@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AddEventPage from '../AddEventPage/AddEventPage';
+import CreatedEventPage from '../CreatedEventPage/CreatedEventPage';
 
 import './App.css';
 
@@ -66,6 +68,20 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/event/add"
+          >
+            <AddEventPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/event/created"
+          >
+            <CreatedEventPage/>
           </ProtectedRoute>
 
           <Route

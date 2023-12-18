@@ -12,7 +12,6 @@ function* addNewEvent(action){
             headers: headers,
             data: action.payload
         });
-        
       } catch (error) {
         console.log('fetchAllGenres error:', error);
       }
