@@ -11,7 +11,7 @@ router.get('/id/:id', (req, res) => {
       SELECT * FROM "events"
       WHERE "id" = $1;
     `;
-    pool.query(query, [req.body.id])
+    pool.query(query, [req.params.id])
       .then(result => {
         res.send(result.rows);
         console.log(result.rows);
