@@ -5,6 +5,7 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const cloudinaryUpload = require("../modules/cloudinary.config");
 
 const router = express.Router();
 
@@ -25,6 +26,32 @@ router.post('/register', (req, res, next) => {
     VALUES ($1, $2) RETURNING id`;
   pool
     .query(queryText, [username, password])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('User registration failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
+router.put('/update', cloudinaryUpload.single("image"), async (req, res, next) => {
+  const username = req.body.username;
+  const password = encryptLib.encryptPassword(req.body.password);
+  const profilePictureUrl = req.file.path;
+  const userBio = req.body.bio;
+  const socialMediaLink = req.body.socialMedia
+  const userId = req.user.id;
+
+  const queryText = `
+      UPDATE "user" 
+        SET "username" = $1,
+            "password" = $2,
+            "profile_picture" = $3,
+            "bio" = $4,
+            "social_media_link" = $5
+          WHERE "id" = $6;`;
+  const queryValues = [username, password, profilePictureUrl, userBio, socialMediaLink, userId]
+  pool
+    .query(queryText, queryValues)
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
