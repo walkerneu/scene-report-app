@@ -12,6 +12,10 @@ function* addNewEvent(action){
             headers: headers,
             data: action.payload
         });
+        yield put({
+            type: "SAGA/GET_CURENT_EVENT",
+            payload: response.data
+        })
       } catch (error) {
         console.log('fetchAllGenres error:', error);
       }

@@ -50,7 +50,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
             res.sendStatus(500);
           });
       }
-      res.sendStatus(201);
+      res.send({id: createdEventId});
     })
     .catch((err) => {
       // Catch for first query

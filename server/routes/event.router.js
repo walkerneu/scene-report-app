@@ -58,5 +58,25 @@ router.get('/id/:id', (req, res) => {
       })
   });
 
+  router.post('/attend/:id', (req, res) => {
+    const eventId = req.params.id;
+    const userId = req.user.id;
+    const query = `
+        INSTER INTO "attendance"
+            ("user_id", "event_id")
+        VALUES
+            ($1, $2);
+    `
+    const sqlValues = [userId, eventId];
+    pool.query(query, sqlValues)
+        .then(result => {
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            console.log('Error in event router POST attendance', err);
+            res.sendStatus(500)
+        })
+  })
+
 
 module.exports = router;
