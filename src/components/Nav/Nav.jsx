@@ -77,8 +77,6 @@ function Nav() {
               <Link className="navLink" to="/info">
                 Info Page
               </Link>
-
-              <LogOutButton className="navLink" />
               </div>
             )}
             <Link className="navLink" to="/about">
@@ -86,10 +84,11 @@ function Nav() {
             </Link>
           </Menu>
           <Link to="/home">
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-            Scene Report! Powered by Slurp™ Industries!
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1, mr: 10, ml: 7 }}>
+            Scene Report: A DIY Events App
           </Typography>
           </Link>
+          <LogOutButton/>
         </Toolbar>
       </AppBar>
     </Box>

@@ -4,6 +4,7 @@ import user from './user.reducer';
 import genres from './genres.reducer';
 import currentEvent from './currentEvent.reducer';
 import userEvents from './userEvents.reducer';
+import currentGenres from './currentGenres.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,7 +18,7 @@ const rootReducer = combineReducers({
   genres,
   currentEvent,
   userEvents,
-  
+  currentGenres,
 });
 
 export default rootReducer;

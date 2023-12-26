@@ -62,7 +62,7 @@ router.get('/id/:id', (req, res) => {
     const eventId = req.params.id;
     const userId = req.user.id;
     const query = `
-        INSTER INTO "attendance"
+        INSERT INTO "attendance"
             ("user_id", "event_id")
         VALUES
             ($1, $2);

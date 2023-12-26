@@ -9,7 +9,11 @@ function* getCurrentEvent(action){
         })
         yield put ({
             type: "SET_CURRENT_EVENT",
-            payload: response.data
+            payload: response.data[0]
+        })
+        yield put ({
+            type: "SAGA/GET_CURRENT_GENRES",
+            payload: action.payload
         })
     } catch (error) {
         console.log('Shoot dang, error in Saga get event by id', error)
