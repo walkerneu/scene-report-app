@@ -19,6 +19,7 @@ function EventPage(){
           payload: id
         })
       }, [])
+    const user = useSelector((store) => store.user);
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
@@ -35,6 +36,13 @@ function EventPage(){
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
       };
+    const deleteEvent = () => {
+        dispatch({
+            type: 'SAGA/DELETE_EVENT',
+            payload: event.id
+        })
+        history.push('/');
+    }
     console.log("We got the event:", event)
     return (
         <div>
@@ -94,9 +102,18 @@ function EventPage(){
         >
           BACK
         </Button>
+        { user.id === event.creator_id ?
+        <>
         <Button size="small" color="primary" onClick={goToEdit}>
           EDIT
         </Button>
+        <Button size="small" color="primary" onClick={deleteEvent}>
+          DELETE
+        </Button>
+        </>
+        :
+        ""
+        }
       </CardActions>
     </Card>
         </div>

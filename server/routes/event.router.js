@@ -86,7 +86,40 @@ router.get('/id/:id', (req, res) => {
 
   router.delete('/delete/:id', (req, res) => {
     const eventId = req.params.id;
-    
+    const query = `
+        DELETE FROM "events_genres"
+        WHERE "event_id" = $1;
+    `
+    pool.query(query, [eventId])
+        .then(result => {
+        const query = `
+            DELETE FROM "attendance"
+            WHERE "event_id" = $1;
+        `
+        pool.query(query, [eventId])
+            .then(result => {
+                const query = `
+                    DELETE FROM "events"
+                    WHERE "id" = $1;
+                `
+                pool.query(query, [eventId])
+                    .then(result => {
+                        res.sendStatus(201)
+                    })
+                    .catch(err => {
+                        console.log('Error in event router DELETE event', err);
+                        res.sendStatus(500);
+                    })
+            })
+            .catch(err => {
+                console.log('Error in event router DELETE event', err);
+                res.sendStatus(500);
+            })
+            })
+        .catch(err => {
+            console.log('Error in event router DELETE event', err);
+            res.sendStatus(500);
+        })
   })
 
 

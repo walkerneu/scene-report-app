@@ -29,6 +29,16 @@ function* attendEvent(action){
         console.log('Heckin heck, error in Saga attend event', error)
     }
 }
+function* deleteEvent(action){
+    try {
+        const response = yield axios({
+            method: "DELETE",
+            url: `/api/event/delete/${action.payload}`
+        })
+    } catch (error) {
+        console.log('Gon git! Error in Saga delete event', error)
+    }
+}
 function* getUsersEvents(action){
     try {
         const response = yield axios({
@@ -48,6 +58,7 @@ function* eventsSaga() {
     yield takeLatest('SAGA/GET_CURRENT_EVENT', getCurrentEvent);
     yield takeLatest('SAGA/ATTEND_EVENT', attendEvent);
     yield takeLatest('SAGA/GET_USER_EVENTS', getUsersEvents);
+    yield takeLatest('SAGA/DELETE_EVENT', deleteEvent);
   }
   
   export default eventsSaga;
