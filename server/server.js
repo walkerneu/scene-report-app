@@ -11,7 +11,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const genresRouter = require('./routes/genres.router');
 const uploadRouter = require('./routes/upload.router');
-const eventRouter = require('./routes/event.router')
+const eventRouter = require('./routes/event.router');
+const searchRouter = require('./routes/search.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/event', eventRouter);
+app.use('api/search', searchRouter);
 
 // Serve static files
 app.use(express.static('build'));
