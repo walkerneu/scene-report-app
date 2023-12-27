@@ -42,15 +42,21 @@ router.get('/id/:id', (req, res) => {
 
   router.get('/user/:id', (req, res) => {
     const query = `
-      SELECT * FROM "events"
+      SELECT
+        "events"."id" AS "event_id"
+        FROM "events"
         JOIN "attendance"
             ON "events"."id"="attendance"."event_id"
         WHERE "attendance"."user_id" = $1;
     `;
     pool.query(query, [req.user.id])
       .then(result => {
-        res.send(result.rows);
-        console.log(result.rows);
+        let eventIdArray = [];
+        for (let row of result.rows){
+            eventIdArray.push(row.event_id)
+        }
+        res.send(eventIdArray);
+        console.log("event ID array:", eventIdArray);
       })
       .catch(err => {
         console.log('Error in event router GET user events:', err);
@@ -76,6 +82,11 @@ router.get('/id/:id', (req, res) => {
             console.log('Error in event router POST attendance', err);
             res.sendStatus(500)
         })
+  })
+
+  router.delete('/delete/:id', (req, res) => {
+    const eventId = req.params.id;
+    
   })
 
 

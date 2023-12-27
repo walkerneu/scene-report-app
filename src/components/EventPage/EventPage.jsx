@@ -21,6 +21,8 @@ function EventPage(){
       }, [])
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
+    const userEvents = useSelector(store => store.userEvents);
+    const isAttending = userEvents.includes(Number(id));
     const goBack = () => {
         history.goBack();
       };
@@ -37,7 +39,7 @@ function EventPage(){
     return (
         <div>
     <Card
-      sx={{ }}
+      sx={{ maxWidth: 950 }}
       className="description-box"
     >
       <CardMedia
@@ -49,10 +51,19 @@ function EventPage(){
         <Typography gutterBottom variant="h3" component="div">
           {event.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="h6">
+          {event.venue}
+        </Typography>
+        <Typography variant="h6">
+          {event.location}
+        </Typography>
+        <Typography gutterBottom variant="h6" component="div">
+          {new Date(event.event_time).toLocaleString('en-us')}
+        </Typography>
+        <Typography variant="body">
           {event.description}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h6" component="div">
           Genres:
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -62,14 +73,19 @@ function EventPage(){
         </Typography>
       </CardContent>
       <CardActions>
-      <Button
+      { isAttending ?
+        <Typography variant="body2">
+            You are attending this event!
+        </Typography>
+        :
+        <Button
           size="small"
           color="primary"
           onClick={attend}
           data-testid="toList"
         >
           Would you like to attend this event?
-        </Button>
+        </Button>}
         <Button
           size="small"
           color="primary"
