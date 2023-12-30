@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AddEventPage from '../AddEventPage/AddEventPage';
 import CreatedEventPage from '../CreatedEventPage/CreatedEventPage';
 import EventPage from '../EventPage/EventPage';
+import SearchPage from '../SearchPage/SearchPage';
 
 import './App.css';
 
@@ -89,6 +90,12 @@ function App() {
             path="/event/:id"
           >
             <EventPage />
+          </Route>
+          <Route
+            exact
+            path="/search"
+          >
+            <SearchPage />
           </Route>
 
           <Route
