@@ -8,6 +8,12 @@ const router = express.Router();
 router.get('/', (req, res) => {
     const query = `
     SELECT * FROM "events"
+    WHERE 
+    ("title" ILIKE $1
+    OR
+    "description" ILIKE $1
+    OR
+    "venue" ILIKE $1)
     `
 })
 

@@ -5,7 +5,7 @@ function* getSearch(action){
     try {
         const response = yield axios({
             method: 'GET',
-            url: `/api/search/?query=${action.payload.query}&date=${action.payload.date}&genre=${action.payload.genre}`
+            url: `/api/search/?query=${action.payload.query}&genre=${action.payload.genre}`
         })
         yield put ({
             type: 'SET_SEARCH_RESULTS',

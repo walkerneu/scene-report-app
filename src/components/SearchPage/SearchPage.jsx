@@ -15,25 +15,14 @@ function SearchPage() {
   console.log(genres)
   const [searchQuery, setSearchQuery] = useState("");
   const [genreQuery, setGenreQuery] = useState("");
-  const handleSearchInput = (event) => {
-    setSearchQuery(event.target.value);
-  };
-  const handleGenreInput = (event) => {
-    setGenreQuery(event.target.value);
-  };
   const submitSearch = () => {
     dispatch({
       type: "SAGA/GET_SEARCH",
-      payload: searchQuery,
+      payload: {
+        query: searchQuery,
+        genre: genreQuery}
     });
-    history.push("/searchResults");
-  };
-  const submitGenreSearch = () => {
-    dispatch({
-      type: "SAGA/GET_GENRE_SEARCH",
-      payload: genreQuery,
-    });
-    history.push("/searchResults");
+    // history.push("/searchResults");
   };
   return (
     <>
@@ -45,12 +34,9 @@ function SearchPage() {
           <TextField
             label="Search by Title"
             type="search"
-            onChange={handleSearchInput}
+            onChange={(event) => setSearchQuery(event.target.value)}
             value={searchQuery}
           />
-          <Button variant="contained" color="secondary" onClick={submitSearch}>
-            Submit
-          </Button>
         </div>
         <div className="search-box">
           <Typography gutterBottom variant="overline" display="block">
@@ -60,7 +46,7 @@ function SearchPage() {
             helperText="Please select a genre"
             value={genreQuery}
             label="genre"
-            onChange={handleGenreInput}
+            onChange={(event) => setGenreQuery(event.target.value)}
           >
             {genres.map((genre) => (
               <MenuItem key={genre.id} value={genre.id}>
@@ -68,13 +54,15 @@ function SearchPage() {
               </MenuItem>
             ))}
           </Select>
+          <p>
           <Button
             variant="contained"
             color="secondary"
-            onClick={submitGenreSearch}
+            onClick={submitSearch}
           >
             Submit
           </Button>
+          </p>
         </div>
       </div>
     </>
