@@ -27,6 +27,14 @@ function Nav() {
       history.push("/");
     } else if (num === 2) {
       history.push("/event/add");
+    } else if (num === 3) {
+      history.push("/search");
+    } else if (num === 4) {
+      history.push("/info");
+    } else if (num === 5) {
+      history.push("/about");
+    } else if (num === 6) {
+      history.push("/login");
     }
   };
 
@@ -61,27 +69,20 @@ function Nav() {
             {/* If no user is logged in, show these links */}
              {!user.id && (
                // If there's no user, show login/registration links
-              <Link className="navLink" to="/login">
-                 <MenuItem>Login / Register</MenuItem>
-              </Link>
+               <div>
+               <MenuItem onClick={() => handleClose(6)}>Login / Register</MenuItem>
+              </div>
             )}
             {/* If a user is logged in, show these links */}
             {user.id && (
               <div>
               <MenuItem onClick={() => handleClose(1)}>Home</MenuItem>
-              <MenuItem onClick={() => handleClose(2)}>Add an Event!</MenuItem>
-              <Link className="navLink" to="/user">
-                Home
-              </Link>
-
-              <Link className="navLink" to="/info">
-                Info Page
-              </Link>
+              <MenuItem onClick={() => handleClose(2)}>Add an Event</MenuItem>
+              <MenuItem onClick={() => handleClose(4)}>Info</MenuItem>
               </div>
             )}
-            <Link className="navLink" to="/about">
-              About
-            </Link>
+              <MenuItem onClick={() => handleClose(3)}>Search</MenuItem>
+              <MenuItem onClick={() => handleClose(5)}>About</MenuItem>
           </Menu>
           <Link to="/home">
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, mr: 10, ml: 7 }}>

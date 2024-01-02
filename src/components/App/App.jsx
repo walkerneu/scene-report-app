@@ -23,6 +23,7 @@ import AddEventPage from '../AddEventPage/AddEventPage';
 import CreatedEventPage from '../CreatedEventPage/CreatedEventPage';
 import EventPage from '../EventPage/EventPage';
 import SearchPage from '../SearchPage/SearchPage';
+import SearchResults from '../SearchResults/SearchResults';
 
 import './App.css';
 
@@ -96,6 +97,12 @@ function App() {
             path="/search"
           >
             <SearchPage />
+          </Route>
+          <Route
+            exact
+            path="/searchResults"
+          >
+            <SearchResults />
           </Route>
 
           <Route

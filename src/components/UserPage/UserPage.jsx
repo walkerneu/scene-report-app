@@ -10,9 +10,11 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
+      <section className="events">
       {userEvents.map(userEvent => (
         <EventItem key={userEvent.event_id} userEvent={userEvent} />
       ))}
+      </section>
       <LogOutButton className="btn" />
     </div>
   );
