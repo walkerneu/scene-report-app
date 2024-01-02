@@ -5,19 +5,30 @@ const {
 const pool = require("../modules/pool");
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    console.log("heres req.query:", req.query)
+    let eventArray = []
     if (req.query.query !== ''){
     const textQuery = `
     SELECT * FROM "events"
     WHERE 
     ("title" ILIKE $1
-    OR
+    OR 
     "description" ILIKE $1
-    OR
+    OR 
     "venue" ILIKE $1);
     `
-    
+    await pool.query(textQuery, [`%${req.query.query}%`])
+    .then((result) => {
+      console.log("text query result", result.rows)
+      eventArray = [...eventArray, ...result.rows]
+    })
+    .catch((err) => {
+      console.log("Error in search router text query:", err);
+      res.sendStatus(500);
+    });
     }
+    if (req.query.genre !== ""){
     const genreQuery = `
     SELECT * FROM "events"
     JOIN "events_genres"
@@ -26,24 +37,19 @@ router.get('/', (req, res) => {
     ON "events_genres"."genre_id"="genres"."id"
     WHERE "genres"."id"=$1;
     `
-    pool.query(textQuery, [req.query.query])
-      .then(result => {
-        eventArray = result.rows
-        pool.query(genreQuery, [req.query.genre])
-            .then(result => {
-                eventArray = [...eventArray, ...result.rows]
-                res.send(eventArray);
-                console.log("Search Router GET search results:", eventArray);
-            })
-            .catch(err => {
-                console.log('Error in search router GET search:', err);
-                res.sendStatus(500)
-            })
-            })
-      .catch(err => {
-        console.log('Error in search router GET search:', err);
-        res.sendStatus(500)
-      })
+    await pool.query(genreQuery, [req.query.genre])
+    .then((result) => {
+      console.log("Genre query result:", result.rows)
+      eventArray = [...eventArray, ...result.rows]
+    })
+    .catch((err) => {
+      console.log("Error in search router genre query:", err);
+      res.sendStatus(500);
+    });
+    }
+    console.log("Here's event array:", eventArray)
+    try {res.send(eventArray)}
+    catch (error) {console.log("error:", error)}
 })
 
 module.exports = router;

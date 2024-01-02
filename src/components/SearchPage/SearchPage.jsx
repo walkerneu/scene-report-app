@@ -22,7 +22,7 @@ function SearchPage() {
         query: searchQuery,
         genre: genreQuery}
     });
-    // history.push("/searchResults");
+    history.push("/searchResults");
   };
   return (
     <>

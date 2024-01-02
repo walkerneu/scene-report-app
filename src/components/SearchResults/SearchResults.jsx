@@ -12,7 +12,6 @@ function SearchResults() {
         <EventItem key={result.event_id} userEvent={result} />
       ))}
       </section>
-      <LogOutButton className="btn" />
     </div>
   );
 }
