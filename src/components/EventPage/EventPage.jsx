@@ -23,7 +23,11 @@ function EventPage(){
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
-    const isAttending = userEvents.includes(Number(id));
+    let eventIdArray = [];
+      for (let userEvent of userEvents) {
+        eventIdArray.push(userEvent.event_id);
+      }
+    const isAttending = eventIdArray.includes(Number(id));
     const goBack = () => {
         history.goBack();
       };

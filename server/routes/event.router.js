@@ -44,8 +44,7 @@ router.get("/created", (req, res) => {
 
 router.get("/user/:id", (req, res) => {
   const query = `
-      SELECT
-        "events"."id" AS "event_id"
+      SELECT *
         FROM "events"
         JOIN "attendance"
             ON "events"."id"="attendance"."event_id"
@@ -54,12 +53,8 @@ router.get("/user/:id", (req, res) => {
   pool
     .query(query, [req.user.id])
     .then((result) => {
-      let eventIdArray = [];
-      for (let row of result.rows) {
-        eventIdArray.push(row.event_id);
-      }
-      res.send(eventIdArray);
-      console.log("event ID array:", eventIdArray);
+      res.send(result.rows);
+      console.log("user Events from event router:", result.rows);
     })
     .catch((err) => {
       console.log("Error in event router GET user events:", err);

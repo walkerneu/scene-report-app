@@ -1,14 +1,18 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
+import EventItem from '../EventItem/EventItem';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const userEvents = useSelector(store => store.userEvents);
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      {userEvents.map(userEvent => (
+        <EventItem key={userEvent.event_id} userEvent={userEvent} />
+      ))}
       <LogOutButton className="btn" />
     </div>
   );

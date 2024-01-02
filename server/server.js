@@ -30,7 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/event', eventRouter);
-app.use('api/search', searchRouter);
+app.use('/api/search', searchRouter);
 
 // Serve static files
 app.use(express.static('build'));
