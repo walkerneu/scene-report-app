@@ -6,6 +6,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -37,6 +40,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div>
         <Nav />
@@ -155,6 +159,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </LocalizationProvider>
   );
 }
 

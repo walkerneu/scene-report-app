@@ -54,11 +54,24 @@ function* getUsersEvents(action){
     }
 }
 
+function* editEvent(action){
+    try {
+        const response = yield axios ({
+            method: "GET",
+            url: `api/event/edit/${action.payload.id}`,
+            data: action.payload.data
+        })
+    } catch (error) {
+        console.log('ARRGGHH, error in Saga edit event', error)
+    }
+}
+
 function* eventsSaga() {
     yield takeLatest('SAGA/GET_CURRENT_EVENT', getCurrentEvent);
     yield takeLatest('SAGA/ATTEND_EVENT', attendEvent);
     yield takeLatest('SAGA/GET_USER_EVENTS', getUsersEvents);
     yield takeLatest('SAGA/DELETE_EVENT', deleteEvent);
+    yield takeLatest('SAGA/UPDATE_EVENT', editEvent)
   }
   
   export default eventsSaga;
