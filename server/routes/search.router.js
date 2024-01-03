@@ -11,6 +11,10 @@ router.get('/', async (req, res) => {
     if (req.query.query !== ''){
     const textQuery = `
     SELECT * FROM "events"
+    JOIN "events_genres"
+    ON "events"."id"="events_genres"."event_id"
+    JOIN "genres"
+    ON "events_genres"."genre_id"="genres"."id"
     WHERE 
     ("title" ILIKE $1
     OR 
