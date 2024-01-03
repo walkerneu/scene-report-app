@@ -18,7 +18,7 @@ function EventPage(){
           type: "SAGA/GET_CURRENT_EVENT",
           payload: id
         })
-      }, [])
+      }, [id])
     const user = useSelector((store) => store.user);
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
@@ -36,6 +36,7 @@ function EventPage(){
             type: "SAGA/ATTEND_EVENT",
             payload: event.id
         })
+        history.replace(`/event/${id}`)
     }
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);

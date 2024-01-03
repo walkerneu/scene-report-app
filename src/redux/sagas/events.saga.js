@@ -25,6 +25,10 @@ function* attendEvent(action){
             method: "POST",
             url: `/api/event/attend/${action.payload}`
         })
+        yield put ({
+            type: "SAGA/GET_CURRENT_EVENT",
+            payload: action.payload
+        })
     } catch (error) {
         console.log('Heckin heck, error in Saga attend event', error)
     }

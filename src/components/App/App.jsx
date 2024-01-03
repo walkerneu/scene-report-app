@@ -27,6 +27,7 @@ import CreatedEventPage from '../CreatedEventPage/CreatedEventPage';
 import EventPage from '../EventPage/EventPage';
 import SearchPage from '../SearchPage/SearchPage';
 import SearchResults from '../SearchResults/SearchResults';
+import EditEvent from '../EditEvent/EditEvent';
 
 import './App.css';
 
@@ -82,6 +83,13 @@ function App() {
             path="/event/add"
           >
             <AddEventPage />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/event/edit/:id"
+          >
+            <EditEvent />
           </ProtectedRoute>
 
           <ProtectedRoute

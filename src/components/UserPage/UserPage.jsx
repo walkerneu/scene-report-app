@@ -1,11 +1,18 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import EventItem from '../EventItem/EventItem';
+import { useEffect } from 'react';
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: "SAGA/GET_USER_EVENTS",
+      payload: user.id
+    })
+  }, [])
   const userEvents = useSelector(store => store.userEvents);
   return (
     <div className="container">

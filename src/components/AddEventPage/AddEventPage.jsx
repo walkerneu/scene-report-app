@@ -15,7 +15,6 @@ function AddEventPage() {
   useEffect(() => {
     dispatch({ type: "SAGA/GET_GENRES" });
   }, []);
-  const newId = useSelector(store => store.createdId)
   const genres = useSelector((store) => store.genres);
   const [eventName, setEventName] = useState('');
   const [imgUpload, setImgUpload] = useState('');
