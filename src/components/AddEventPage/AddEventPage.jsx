@@ -15,6 +15,7 @@ function AddEventPage() {
   useEffect(() => {
     dispatch({ type: "SAGA/GET_GENRES" });
   }, []);
+  const newId = useSelector(store => store.createdId)
   const genres = useSelector((store) => store.genres);
   const [eventName, setEventName] = useState('');
   const [imgUpload, setImgUpload] = useState('');
@@ -31,10 +32,10 @@ function AddEventPage() {
     setEventTime(null);
     setVenue('');
     setCityState('');
-    setSelectedGenre('');
+    setSelectedGenre([]);
     history.goBack();
   };
-  const addEvent = () => {
+  const addEvent = async () => {
     eventForm.append("image", imgUpload);
     eventForm.append("eventName", eventName);
     eventForm.append("description", eventBio);
@@ -43,17 +44,17 @@ function AddEventPage() {
     eventForm.append("location", cityState);
     eventForm.append("genre_id", selectedGenre);
     dispatch({
-      type: 'SAGA/ADD_EVENT',
-      payload: eventForm
-    });
+    type: 'SAGA/ADD_EVENT',
+    payload: { eventForm: eventForm,
+                history: history
+    }});
     setImgUpload('');
     setEventName('');
     setEventBio('');
     setEventTime('');
     setVenue('');
     setCityState('');
-    setSelectedGenre('');
-    history.push('/event/created');
+    setSelectedGenre([]);
   };
   console.log("event time:", eventTime)
   return (

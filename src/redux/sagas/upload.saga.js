@@ -10,12 +10,9 @@ function* addNewEvent(action){
             method: "POST",
             url: "/api/upload",
             headers: headers,
-            data: action.payload
+            data: action.payload.eventForm
         });
-        yield put({
-            type: "SAGA/GET_CURENT_EVENT",
-            payload: response.data
-        })
+        yield action.payload.history.push(`/event/${response.data.id}`)
       } catch (error) {
         console.log('fetchAllGenres error:', error);
       }
