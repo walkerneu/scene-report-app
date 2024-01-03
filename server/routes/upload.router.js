@@ -30,6 +30,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
     .then((result) => {
       // ID IS HERE!
       console.log("New Event Id:", result.rows[0].id);
+      console.log("Genre ID array:", genreIdArray)
       const createdEventId = result.rows[0].id;
       // Now handle the genre reference:
       for (let genreId of genreIdArray) {

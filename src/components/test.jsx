@@ -54,7 +54,6 @@ function AddEventPage() {
     setCityState('');
     setSelectedGenre('');
     history.push('/event/created');
-    history.push("/");
   };
   return (
     <Card 
@@ -109,7 +108,33 @@ function AddEventPage() {
         rows={5}
         variant="filled"
         value={eventBio}
-        onChange={() => handleMovieSubmit(event, 3)}
+        onChange={(event) => setEventBio(event.target.value)}
+      />
+      </p>
+      <p>
+      <Typography gutterBottom variant="overline" display="block">
+        Enter Event Venue:
+      </Typography>
+      <TextField
+        label="Event Venue"
+        multiline
+        rows={1}
+        variant="filled"
+        value={venue}
+        onChange={(event) => setVenue(event.target.value)}
+      />
+      </p>
+      <p>
+      <Typography gutterBottom variant="overline" display="block">
+        Enter City and State:
+      </Typography>
+      <TextField
+        label="Event City/State"
+        multiline
+        rows={1}
+        variant="filled"
+        value={cityState}
+        onChange={(event) => setCityState(event.target.value)}
       />
       </p>
       <p>
@@ -118,10 +143,10 @@ function AddEventPage() {
       </Typography>
       <Select
         multiple
-        helperText="Please select the movie's genre"
-        value={movieInput.genre_id}
+        helperText="Please select event genres"
+        value={selectedGenre}
         label="genre"
-        onChange={handleGenreSelect}
+        onChange={(event) => setSelectedGenre(event.target.value)}
       >
         {genres.map((genre) => (
           <MenuItem key={genre.id} value={genre.id}>
@@ -131,7 +156,7 @@ function AddEventPage() {
       </Select>
       </p>
       <CardActions>
-      <Button variant="contained" color="success" onClick={submitMovie}>
+      <Button variant="contained" color="success" onClick={addEvent}>
         Submit
       </Button>
       <Button variant="outlined" color="error" onClick={cancelSubmission}>
