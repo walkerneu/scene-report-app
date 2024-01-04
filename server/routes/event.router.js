@@ -124,4 +124,27 @@ router.delete("/delete/:id", (req, res) => {
     });
 });
 
+router.put('/edit/:id', (req, res) => {
+    const query = `
+    UPDATE "events"
+    SET
+    "title" = $1,
+    "description" = $2,
+    "event_time" = $3,
+    "venue" = $4,
+    "location" = $5
+    WHERE "id"=$6;
+    `
+    const sqlValues = [req.body.eventName, req.body.eventBio, req.body.eventTime, req.body.venue, req.body.cityState, req.params.id]
+    pool
+    .query(query, sqlValues)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log("Error in event router PUT route", err);
+      res.sendStatus(500);
+    });
+})
+
 module.exports = router;

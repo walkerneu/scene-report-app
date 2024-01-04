@@ -61,7 +61,7 @@ function* getUsersEvents(action){
 function* editEvent(action){
     try {
         const response = yield axios ({
-            method: "GET",
+            method: "PUT",
             url: `api/event/edit/${action.payload.id}`,
             data: action.payload.data
         })
@@ -75,7 +75,7 @@ function* eventsSaga() {
     yield takeLatest('SAGA/ATTEND_EVENT', attendEvent);
     yield takeLatest('SAGA/GET_USER_EVENTS', getUsersEvents);
     yield takeLatest('SAGA/DELETE_EVENT', deleteEvent);
-    yield takeLatest('SAGA/UPDATE_EVENT', editEvent)
+    yield takeLatest('SAGA/EDIT_EVENT', editEvent);
   }
   
   export default eventsSaga;

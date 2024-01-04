@@ -14,6 +14,7 @@ function EditEvent() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch({ 
         type: "SAGA/GET_CURRENT_EVENT",
@@ -23,19 +24,19 @@ function EditEvent() {
         type: "SAGA/GET_GENRES",
      });
   }, []);
+
   const currentEvent = useSelector(store => store.currentEvent)
   const currentGenres = useSelector(store => store.currentGenres)
   const genres = useSelector((store) => store.genres);
+
   const [eventName, setEventName] = useState(currentEvent.title);
-  const [imgUpload, setImgUpload] = useState('');
   const [selectedGenre, setSelectedGenre] = useState(currentGenres);
   const [eventBio, setEventBio] = useState(currentEvent.description);
   const [eventTime, setEventTime] = useState(currentEvent.event_time);
   const [venue, setVenue] = useState(currentEvent.venue);
   const [cityState, setCityState] = useState(currentEvent.location);
-  const eventForm = new FormData ();
+
   const cancelSubmission = () => {
-    setImgUpload('');
     setEventName('');
     setEventBio('');
     setEventTime(null);
@@ -44,26 +45,21 @@ function EditEvent() {
     setSelectedGenre([]);
     history.goBack();
   };
+
   const editEvent = () => {
-    eventForm.append("image", imgUpload);
-    eventForm.append("eventName", eventName);
-    eventForm.append("description", eventBio);
-    eventForm.append("event_time", eventTime);
-    eventForm.append("venue", venue);
-    eventForm.append("location", cityState);
-    eventForm.append("genre_id", selectedGenre);
     dispatch({
     type: 'SAGA/EDIT_EVENT',
-    payload: { eventForm: eventForm,
-                history: history
+    payload: { 
+        id,
+        data: { eventName, eventBio, eventTime, venue, cityState, selectedGenre }
     }});
-    setImgUpload('');
     setEventName('');
     setEventBio('');
-    setEventTime('');
+    setEventTime(null);
     setVenue('');
     setCityState('');
     setSelectedGenre([]);
+    history.push(`/event/${id}`)
   };
   console.log("event time:", eventTime)
   console.log("current genres:", currentGenres)
