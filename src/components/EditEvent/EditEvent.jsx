@@ -19,13 +19,16 @@ function EditEvent() {
         type: "SAGA/GET_CURRENT_EVENT",
         payload: id
      });
+     dispatch({ 
+        type: "SAGA/GET_GENRES",
+     });
   }, []);
   const currentEvent = useSelector(store => store.currentEvent)
   const currentGenres = useSelector(store => store.currentGenres)
   const genres = useSelector((store) => store.genres);
   const [eventName, setEventName] = useState(currentEvent.title);
   const [imgUpload, setImgUpload] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState([currentGenres]);
+  const [selectedGenre, setSelectedGenre] = useState(currentGenres);
   const [eventBio, setEventBio] = useState(currentEvent.description);
   const [eventTime, setEventTime] = useState(currentEvent.event_time);
   const [venue, setVenue] = useState(currentEvent.venue);
@@ -63,17 +66,18 @@ function EditEvent() {
     setSelectedGenre([]);
   };
   console.log("event time:", eventTime)
+  console.log("current genres:", currentGenres)
   return (
     <Card 
         sx={{ maxWidth: 800}} 
         data-testid="movieDetails"
         className="description-box">
       <Typography gutterBottom variant="h4" component="div" mt={5}>
-        Add A New Event!
+        Edit Your Event:
       </Typography>
         <p>
       <Typography gutterBottom variant="overline" display="block">
-        Enter Event Title:
+        Event Title:
       </Typography>
       <TextField
         id="filled-multiline-flexible"
@@ -88,17 +92,7 @@ function EditEvent() {
       </p>
       <p>
       <Typography gutterBottom variant="overline" display="block">
-        Upload Event Image:
-      </Typography>
-      <TextField
-            type="file" 
-            className="form-control-file" 
-            name="uploaded_file"
-            onChange={(evt) => setImgUpload(evt.target.files[0])} />
-      </p>
-      <p>
-      <Typography gutterBottom variant="overline" display="block">
-        Enter Event Time:
+        Event Time:
       </Typography>
       <DateTimePicker
         label="Event Time"
@@ -108,7 +102,7 @@ function EditEvent() {
       </p>
       <p>
       <Typography gutterBottom variant="overline" display="block">
-        Enter Event Description:
+        Event Description:
       </Typography>
       <TextField
         label="Event Description"
@@ -121,7 +115,7 @@ function EditEvent() {
       </p>
       <p>
       <Typography gutterBottom variant="overline" display="block">
-        Enter Event Venue:
+        Event Venue:
       </Typography>
       <TextField
         label="Event Venue"
@@ -134,7 +128,7 @@ function EditEvent() {
       </p>
       <p>
       <Typography gutterBottom variant="overline" display="block">
-        Enter City and State:
+        City and State:
       </Typography>
       <TextField
         label="Event City/State"
@@ -152,7 +146,11 @@ function EditEvent() {
       <Select
         multiple
         helperText="Please select event genres"
-        value={selectedGenre}
+        value={selectedGenre.map((genre) => {
+            let array = []
+            array.push(genre.id)
+            return array
+        })}
         label="genre"
         onChange={(event) => setSelectedGenre(event.target.value)}
       >

@@ -23,7 +23,10 @@ router.get('/all', (req, res) => {
 
 router.get('/event/:id', (req, res) => {
     const query = `
-      SELECT * FROM "genres"
+      SELECT 
+      "genres"."id" AS "id",
+      "genres"."genre_name" 
+      FROM "genres"
         JOIN "events_genres"
         ON "genres"."id"="events_genres"."genre_id"
         JOIN "events"
