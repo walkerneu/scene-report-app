@@ -35,6 +35,8 @@ function Nav() {
       history.push("/about");
     } else if (num === 6) {
       history.push("/login");
+    } else if (num === 7) {
+      history.push(`/user/${user.id}`);
     }
   };
 
@@ -78,6 +80,7 @@ function Nav() {
               <div>
               <MenuItem onClick={() => handleClose(1)}>Home</MenuItem>
               <MenuItem onClick={() => handleClose(2)}>Add an Event</MenuItem>
+              <MenuItem onClick={() => handleClose(7)}>My Profile</MenuItem>
               <MenuItem onClick={() => handleClose(4)}>Info</MenuItem>
               </div>
             )}

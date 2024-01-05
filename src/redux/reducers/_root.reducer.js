@@ -6,6 +6,7 @@ import currentEvent from './currentEvent.reducer';
 import userEvents from './userEvents.reducer';
 import currentGenres from './currentGenres.reducer';
 import searchResults from './searchResults';
+import currentUser from './currentUser.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   userEvents,
   currentGenres,
   searchResults,
+  currentUser,
 
 });
 

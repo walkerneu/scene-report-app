@@ -28,8 +28,24 @@ function* fetchUser() {
   }
 }
 
+function* getCurrentUser(action){
+  try {
+    const response = yield axios({
+        method: "GET",
+        url: `/api/user/id/${action.payload}`
+    })
+    yield put ({
+        type: "SET_CURRENT_USER",
+        payload: response.data[0]
+    })
+} catch (error) {
+    console.log('Shoot dang, error in Saga get event by id', error)
+}  
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('SAGA/GET_CURRENT_USER', getCurrentUser);
 }
 
 export default userSaga;

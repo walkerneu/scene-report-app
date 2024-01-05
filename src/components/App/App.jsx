@@ -28,6 +28,7 @@ import EventPage from '../EventPage/EventPage';
 import SearchPage from '../SearchPage/SearchPage';
 import SearchResults from '../SearchResults/SearchResults';
 import EditEvent from '../EditEvent/EditEvent';
+import UserProfile from '../UserProfile/UserProfile';
 
 import './App.css';
 
@@ -115,6 +116,12 @@ function App() {
             path="/searchResults"
           >
             <SearchResults />
+          </Route>
+          <Route
+            exact
+            path="/user/:id"
+          >
+            <UserProfile />
           </Route>
 
           <Route

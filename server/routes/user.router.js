@@ -15,6 +15,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get('/id/:id', (req, res) => {
+  const query = `
+      SELECT * FROM "user"
+      WHERE "id"=$1;
+    `;
+    pool.query(query, [req.params.id])
+      .then(result => {
+        res.send(result.rows);
+        console.log(result.rows);
+      })
+      .catch(err => {
+        console.log('Error in genres router GET all:', err);
+        res.sendStatus(500)
+      })
+})
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
