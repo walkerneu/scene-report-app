@@ -39,13 +39,29 @@ function* getCurrentUser(action){
         payload: response.data[0]
     })
 } catch (error) {
-    console.log('Shoot dang, error in Saga get event by id', error)
+    console.log('Shoot dang, error in Saga get user by id', error)
 }  
+}
+
+function* updateUserProfile(action){
+  try {
+    const response = yield axios({
+      method: "PUT",
+      url: `/api/user/update`,
+      data: action.payload
+    })
+    yield put ({
+      type: 'FETCH_USER'
+    })
+  } catch (error) {
+    console.log('Grum! The Saga updateUserProfile failed', error)
+  }
 }
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('SAGA/GET_CURRENT_USER', getCurrentUser);
+  yield takeLatest('SAGA/UPDATE_PROFILE', updateUserProfile);
 }
 
 export default userSaga;

@@ -7,34 +7,19 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 
 function EditPage() {
-  const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const currentMovie = useSelector((store) => store.currentMovie);
-  const [movieInput, setMovieInput] = useState({
-    title: currentMovie.title,
-    description: currentMovie.description,
-  });
-  const handleMovieSubmit = (event, num) => {
-    if (num === 1) {
-      setMovieInput({ ...movieInput, title: event.target.value });
-    } else {
-      setMovieInput({ ...movieInput, description: event.target.value });
-    }
-  };
+  const user = useSelector((store) => store.user);
+  
   const cancelSubmission = () => {
-    setMovieInput({
-      title: currentMovie.title,
-      description: currentMovie.description,
-    });
     history.goBack();
   };
-  const updateMovie = () => {
+  const updateProfile = () => {
     dispatch({
-      type: "SAGA/UPDATE_EVENT",
-      payload: { id: id, data: movieInput },
+      type: "SAGA/UPDATE_PROFILE",
+      payload: { data: {} },
     });
-    history.push(`/description/${id}`);
+    history.push(`/user/${user.id}`);
   };
   return (
     <Card
@@ -75,7 +60,7 @@ function EditPage() {
         />
       </p>
       <CardActions>
-        <Button variant="contained" color="success" onClick={updateMovie}>
+        <Button variant="contained" color="success" onClick={updateProfile}>
           Submit
         </Button>
         <Button variant="outlined" color="error" onClick={cancelSubmission}>

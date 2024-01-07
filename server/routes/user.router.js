@@ -49,10 +49,16 @@ router.post('/register', (req, res, next) => {
     });
 });
 
-router.put('/update', cloudinaryUpload.single("image"), async (req, res, next) => {
+router.put('/update', cloudinaryUpload.single("image"), async (req, res) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
-  const profilePictureUrl = req.file.path;
+  let profilePictureUrl
+  if (req.file.path){
+    profilePictureUrl = req.file.path
+  }
+  else {
+    profilePictureUrl = null
+  }
   const userBio = req.body.bio;
   const socialMediaLink = req.body.socialMedia
   const userId = req.user.id;
