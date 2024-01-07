@@ -62,6 +62,28 @@ router.get("/user/:id", (req, res) => {
     });
 });
 
+router.get("/attendees/:id", (req, res) => {
+    const query = `
+    SELECT
+    "user"."id" AS "id",
+    "user"."username",
+    "user"."profile_picture"
+    FROM "user"
+    JOIN "attendance"
+        ON "user"."id"="attendance"."user_id"
+    WHERE "attendance"."event_id"=$1;
+    `
+    pool.query(query, [req.params.id])
+    .then((result) => {
+        res.send(result.rows);
+        console.log("event attendees in event router:", result.rows)
+    })
+    .catch((error) => {
+        console.log("error in event router GET attendees", error)
+        res.sendStatus(500)
+    })
+})
+
 router.post("/attend/:id", (req, res) => {
   const eventId = req.params.id;
   const userId = req.user.id;

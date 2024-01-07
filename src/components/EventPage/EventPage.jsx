@@ -23,6 +23,7 @@ function EventPage(){
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
+    const attendees = useSelector(store => store.eventAttendees)
     let eventIdArray = [];
       for (let userEvent of userEvents) {
         eventIdArray.push(userEvent.event_id);
@@ -48,7 +49,30 @@ function EventPage(){
         })
         history.push('/');
     }
-    console.log("We got the event:", event)
+    const attendanceDisplay = () => {
+        if (attendees.length > 1){
+            return (
+                <Typography variant="body2">
+                    There are {attendees.length} people attending this event!
+                </Typography>
+            )
+        }
+        else if (attendees.length === 1){
+            return (
+                <Typography variant="body2">
+                    There is 1 person attending this event!
+                </Typography>
+            )
+        }
+        else {
+            return (
+                <Typography variant="body2">
+                    There are no people attending this event!
+                </Typography>
+            )
+        }
+    }
+    console.log("We got attendees:", attendees)
     return (
         <div>
     <Card
@@ -84,6 +108,7 @@ function EventPage(){
             <span key={genre.id}> {genre.genre_name} /</span>
           ))}
         </Typography>
+        {attendanceDisplay()}
       </CardContent>
       <CardActions>
       { isAttending ?
