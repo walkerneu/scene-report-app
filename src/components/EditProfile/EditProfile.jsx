@@ -6,58 +6,96 @@ import { useHistory, useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 
-function EditPage() {
+function EditProfile() {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const [username, setUsername] = useState(user.username);
+  const [bio, setBio] = useState(user.bio);
+  const [socialMediaLink, setSocialMediaLink] = useState(user.social_media_link);
+  const [profilePicture, setProfilePicture] = useState('')
+  const profileForm = new FormData ();
   
   const cancelSubmission = () => {
     history.goBack();
   };
   const updateProfile = () => {
+    if(profilePicture === ''){
+        profileForm.append("profile_picture", user.profile_picture)
+    }
+    else {
+        profileForm.append("image", profilePicture)
+    }
+    profileForm.append("username", username)
+    profileForm.append("bio", bio)
+    profileForm.append("social_media_link", socialMediaLink)
     dispatch({
       type: "SAGA/UPDATE_PROFILE",
-      payload: { data: {} },
+      payload: profileForm
     });
     history.push(`/user/${user.id}`);
   };
   return (
     <Card
-      sx={{ maxWidth: 600, height: 600 }}
+      sx={{ maxWidth: 600 }}
       data-testid="movieDetails"
       className="description-box"
     >
       <Typography gutterBottom variant="h4" component="div" mt={5}>
-        Edit {currentMovie.title}!
+        Edit You Profile!
       </Typography>
       <p>
         <Typography gutterBottom variant="overline" display="block">
-          Edit Movie Title:
+          Edit Username:
         </Typography>
         <TextField
           id="filled-multiline-flexible"
-          label="Movie Title"
-          placeholder="Movie Title"
+          label="username"
+          placeholder="username"
           multiline
           maxRows={4}
           variant="filled"
-          value={movieInput.title}
-          onChange={() => handleMovieSubmit(event, 1)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
         />
       </p>
       <p>
         <Typography gutterBottom variant="overline" display="block">
-          Edit Movie Description:
+          Edit Bio:
         </Typography>
         <TextField
           id="filled-multiline-static"
-          label="Movie Description"
+          label="Your Bio"
           multiline
           rows={6}
           variant="filled"
-          value={movieInput.description}
-          onChange={() => handleMovieSubmit(event, 2)}
+          value={bio}
+          onChange={(event) => setBio(event.target.value)}
         />
+      </p>
+      <p>
+        <Typography gutterBottom variant="overline" display="block">
+          Edit Social Media Link:
+        </Typography>
+        <TextField
+          id="filled-multiline-static"
+          label="Social Media Link"
+          multiline
+          rows={2}
+          variant="filled"
+          value={socialMediaLink}
+          onChange={(event) => setSocialMediaLink(event.target.value)}
+        />
+      </p>
+      <p>
+      <Typography gutterBottom variant="overline" display="block">
+        Upload New Profile Picture:
+      </Typography>
+      <TextField
+            type="file" 
+            className="form-control-file" 
+            name="uploaded_file"
+            onChange={(evt) => setProfilePicture(evt.target.files[0])} />
       </p>
       <CardActions>
         <Button variant="contained" color="success" onClick={updateProfile}>
@@ -71,4 +109,4 @@ function EditPage() {
   );
 }
 
-export default EditPage;
+export default EditProfile;

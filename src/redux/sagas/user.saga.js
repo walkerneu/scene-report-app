@@ -45,6 +45,9 @@ function* getCurrentUser(action){
 
 function* updateUserProfile(action){
   try {
+    const headers = {
+      'content-type': 'multipart/form-data'
+    }
     const response = yield axios({
       method: "PUT",
       url: `/api/user/update`,

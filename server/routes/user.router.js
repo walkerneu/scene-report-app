@@ -50,28 +50,28 @@ router.post('/register', (req, res, next) => {
 });
 
 router.put('/update', cloudinaryUpload.single("image"), async (req, res) => {
-  const username = req.body.username;
-  const password = encryptLib.encryptPassword(req.body.password);
   let profilePictureUrl
-  if (req.file.path){
-    profilePictureUrl = req.file.path
+  if (!req.file){
+    profilePictureUrl = req.body.profile_picture
   }
   else {
-    profilePictureUrl = null
+    profilePictureUrl = req.file.path
   }
+  console.log("req.file is", req.file)
+  const username = req.body.username;
   const userBio = req.body.bio;
-  const socialMediaLink = req.body.socialMedia
+  const socialMediaLink = req.body.social_media_link
   const userId = req.user.id;
 
   const queryText = `
       UPDATE "user" 
         SET "username" = $1,
-            "password" = $2,
-            "profile_picture" = $3,
-            "bio" = $4,
-            "social_media_link" = $5
-          WHERE "id" = $6;`;
-  const queryValues = [username, password, profilePictureUrl, userBio, socialMediaLink, userId]
+            "profile_picture" = $2,
+            "bio" = $3,
+            "social_media_link" = $4
+          WHERE "id" = $5;`;
+  const queryValues = [username, profilePictureUrl, userBio, socialMediaLink, userId]
+  console.log("queryValues:", queryValues);
   pool
     .query(queryText, queryValues)
     .then(() => res.sendStatus(201))

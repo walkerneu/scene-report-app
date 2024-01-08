@@ -30,6 +30,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import EditEvent from '../EditEvent/EditEvent';
 import UserProfile from '../UserProfile/UserProfile';
 import AttendancePage from '../AttendancePage/AttendancePage';
+import EditProfile from '../EditProfile/EditProfile';
 
 import './App.css';
 
@@ -130,6 +131,12 @@ function App() {
           >
             <UserProfile />
           </Route>
+          <ProtectedRoute
+            exact
+            path="/user/edit/:id"
+          >
+            <EditProfile />
+          </ProtectedRoute>
 
           <Route
             exact
