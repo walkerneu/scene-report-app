@@ -29,6 +29,7 @@ import SearchPage from '../SearchPage/SearchPage';
 import SearchResults from '../SearchResults/SearchResults';
 import EditEvent from '../EditEvent/EditEvent';
 import UserProfile from '../UserProfile/UserProfile';
+import AttendancePage from '../AttendancePage/AttendancePage';
 
 import './App.css';
 
@@ -116,6 +117,12 @@ function App() {
             path="/searchResults"
           >
             <SearchResults />
+          </Route>
+          <Route
+            exact
+            path="/attendance"
+          >
+            <AttendancePage />
           </Route>
           <Route
             exact

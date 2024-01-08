@@ -42,6 +42,9 @@ function EventPage(){
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
       };
+      const goToAttendance = () => {
+        history.push(`/attendance`);
+      };
     const deleteEvent = () => {
         dispatch({
             type: 'SAGA/DELETE_EVENT',
@@ -52,14 +55,18 @@ function EventPage(){
     const attendanceDisplay = () => {
         if (attendees.length > 1){
             return (
-                <Typography variant="body2">
+                <Typography 
+                    variant="body2"
+                    onClick={goToAttendance}>
                     There are {attendees.length} people attending this event!
                 </Typography>
             )
         }
         else if (attendees.length === 1){
             return (
-                <Typography variant="body2">
+                <Typography 
+                    variant="body2"
+                    onClick={goToAttendance}>
                     There is 1 person attending this event!
                 </Typography>
             )
