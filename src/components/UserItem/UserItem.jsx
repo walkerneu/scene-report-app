@@ -11,14 +11,13 @@ function UserItem ({ attendee }){
         history.push(`/user/${attendee.id}`);
     }
     return (  
-    <Card sx={{ maxWidth: 183 }}>
+    <Card sx={{ maxWidth: 183 }} onClick={imgClick}>
       <CardActionArea>
         <CardMedia
           component="img"
           className="movie-media"
           image={attendee.profile_picture}
           alt={attendee.username}
-          onClick={imgClick}
           data-testid="toDetails"
         />
         <CardContent>

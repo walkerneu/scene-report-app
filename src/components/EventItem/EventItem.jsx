@@ -11,14 +11,13 @@ function EventItem ({ userEvent }){
         history.push(`/event/${userEvent.id}`);
     }
     return (  
-    <Card sx={{ maxWidth: 183 }}>
+    <Card sx={{ maxWidth: 183 }} onClick={imgClick}>
       <CardActionArea>
         <CardMedia
           component="img"
           className="movie-media"
           image={userEvent.event_photo_url}
           alt={userEvent.title}
-          onClick={imgClick}
           data-testid="toDetails"
         />
         <CardContent>
