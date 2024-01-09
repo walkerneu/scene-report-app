@@ -19,11 +19,17 @@ function EventPage(){
           payload: id
         })
       }, [id])
+      
     const user = useSelector((store) => store.user);
     const event = useSelector(store => store.currentEvent);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
     const attendees = useSelector(store => store.eventAttendees)
+    const now = new Date ();
+    const eventTime = new Date (event.event_time);
+    const msPerDay = 24 * 60 * 60 * 1000; 
+    const daysUntil = Math.round((eventTime.getTime() - now.getTime()) / msPerDay)
+    console.log("Here's the difference:", daysUntil)
     let eventIdArray = [];
       for (let userEvent of userEvents) {
         eventIdArray.push(userEvent.id);
@@ -104,6 +110,7 @@ function EventPage(){
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
           {new Date(event.event_time).toLocaleString('en-us')}
+          <p>There are {daysUntil} days until this event!</p>
         </Typography>
         <Typography variant="body">
           {event.description}

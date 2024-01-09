@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     let eventArray = []
     if (req.query.query !== ''){
     const textQuery = `
-    SELECT
+    SELECT DISTINCT
     "events"."id" AS "id",
     "events"."title",
     "events"."description",
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
     }
     if (req.query.genre !== ""){
     const genreQuery = `
-    SELECT
+    SELECT DISTINCT
     "events"."id" AS "id",
     "events"."title",
     "events"."description",

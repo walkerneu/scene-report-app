@@ -14,13 +14,20 @@ function UserPage() {
     })
   }, [])
   const userEvents = useSelector(store => store.userEvents);
+  const now = new Date ();
+  const msPerDay = 24 * 60 * 60 * 1000; 
+  
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <section className="events">
-      {userEvents.map(userEvent => (
-        <EventItem key={userEvent.event_id} userEvent={userEvent} />
-      ))}
+      {userEvents.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) >= 0){
+        return (
+        <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
       </section>
       <LogOutButton className="btn" />
     </div>
