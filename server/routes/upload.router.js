@@ -60,4 +60,38 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
     });
 });
 
+router.put('/edit/:id', cloudinaryUpload.single("image"), async (req, res) => {
+    let eventPhoto
+        if (!req.file){
+            eventPhoto = req.body.event_photo_url
+        }
+        else {
+            eventPhoto = req.file.path
+        }
+    console.log("here's req.file:", req.file)
+    const query = `
+    UPDATE "events"
+    SET
+    "title" = $1,
+    "description" = $2,
+    "event_photo_url" = $3,
+    "event_time" = $4,
+    "venue" = $5,
+    "location" = $6
+    WHERE "id"=$7;
+    `
+    const sqlValues = [req.body.title, req.body.description, eventPhoto, req.body.event_time, req.body.venue, req.body.location, req.params.id]
+    pool
+    .query(query, sqlValues)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log("Error in event router PUT route", err);
+      res.sendStatus(500);
+    });
+})
+
+
+
 module.exports = router;

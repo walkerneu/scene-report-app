@@ -23,7 +23,7 @@ function EditEvent() {
      dispatch({ 
         type: "SAGA/GET_GENRES",
      });
-  }, []);
+  }, [id]);
 
   const currentEvent = useSelector(store => store.currentEvent)
   const currentGenres = useSelector(store => store.currentGenres)
@@ -35,6 +35,8 @@ function EditEvent() {
   const [eventTime, setEventTime] = useState(currentEvent.event_time);
   const [venue, setVenue] = useState(currentEvent.venue);
   const [cityState, setCityState] = useState(currentEvent.location);
+  const [eventPhoto, setEventPhoto] = useState('');
+  const editForm = new FormData ();
 
   const cancelSubmission = () => {
     setEventName('');
@@ -47,11 +49,22 @@ function EditEvent() {
   };
 
   const editEvent = () => {
+    if(eventPhoto === ''){
+        editForm.append("event_photo_url", currentEvent.event_photo_url)
+    }
+    else {
+        editForm.append("image", eventPhoto)
+    }
+    editForm.append('title', eventName)
+    editForm.append('description', eventBio)
+    editForm.append('event_time', eventTime)
+    editForm.append('venue', venue)
+    editForm.append('location', cityState)
     dispatch({
     type: 'SAGA/EDIT_EVENT',
     payload: { 
         id,
-        data: { eventName, eventBio, eventTime, venue, cityState, selectedGenre }
+        data: editForm
     }});
     setEventName('');
     setEventBio('');
@@ -61,8 +74,6 @@ function EditEvent() {
     setSelectedGenre([]);
     history.push(`/event/${id}`)
   };
-  console.log("event time:", eventTime)
-  console.log("current genres:", currentGenres)
   return (
     <Card 
         sx={{ maxWidth: 800}} 
@@ -85,6 +96,16 @@ function EditEvent() {
         value={eventName}
         onChange={(event) => setEventName(event.target.value)}
       />
+      </p>
+      <p>
+      <Typography gutterBottom variant="overline" display="block">
+        Upload New Event Photo:
+      </Typography>
+      <TextField
+            type="file" 
+            className="form-control-file" 
+            name="uploaded_file"
+            onChange={(evt) => setEventPhoto(evt.target.files[0])} />
       </p>
       <p>
       <Typography gutterBottom variant="overline" display="block">

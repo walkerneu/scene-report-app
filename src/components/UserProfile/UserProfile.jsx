@@ -47,7 +47,7 @@ function UserProfile(){
           Bio: {currentUser && currentUser.bio}
         </Typography>
         <Typography gutterBottom variant="h6" component="div">
-          Social Media Link: {currentUser && currentUser.social_media_link}
+          <a href={currentUser && currentUser.social_media_link}>Social Media Link</a>
         </Typography>
       </CardContent>
       <CardActions>

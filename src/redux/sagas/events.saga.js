@@ -64,9 +64,13 @@ function* getUsersEvents(action){
 
 function* editEvent(action){
     try {
+        const headers = {
+            'content-type': 'multipart/form-data'
+          }
         const response = yield axios ({
             method: "PUT",
-            url: `api/event/edit/${action.payload.id}`,
+            url: `api/upload/edit/${action.payload.id}`,
+            headers: headers,
             data: action.payload.data
         })
     } catch (error) {
