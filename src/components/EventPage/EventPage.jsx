@@ -26,7 +26,7 @@ function EventPage(){
     const attendees = useSelector(store => store.eventAttendees)
     let eventIdArray = [];
       for (let userEvent of userEvents) {
-        eventIdArray.push(userEvent.event_id);
+        eventIdArray.push(userEvent.id);
       }
     const isAttending = eventIdArray.includes(Number(id));
     const goBack = () => {
@@ -79,15 +79,16 @@ function EventPage(){
             )
         }
     }
-    console.log("We got attendees:", attendees)
+    console.log("We got event:", event)
     return (
         <div>
     <Card
-      sx={{ maxWidth: 950 }}
+      sx={{ width: 950 }}
       className="description-box"
     >
       <CardMedia
         component="img"
+        className='event-img'
         image={event.event_photo_url}
         alt={event.title}
       />
@@ -130,7 +131,8 @@ function EventPage(){
           data-testid="toList"
         >
           Would you like to attend this event?
-        </Button>}
+        </Button>
+        }
         <Button
           size="small"
           color="primary"
