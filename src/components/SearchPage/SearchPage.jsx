@@ -24,9 +24,24 @@ function SearchPage() {
     });
     history.push("/searchResults");
   };
+  const searchAll = () => {
+    dispatch({
+      type: "SAGA/GET_ALL_EVENTS"
+    });
+    history.push("/searchResults");
+  };
   return (
     <>
       <div className="search-container">
+        <p>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={searchAll}
+          >
+            View All Events
+          </Button>
+        </p>
         <div className="search-box">
           <Typography gutterBottom variant="overline" display="block" mt={3}>
             Search for Events by keyword:

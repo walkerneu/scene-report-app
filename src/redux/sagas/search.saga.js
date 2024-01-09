@@ -16,8 +16,24 @@ function* getSearch(action){
     }
 }
 
+function* getAllEvents(){
+    try {
+        const response = yield axios({
+            method: "GET",
+            url: "/api/search/all"
+        })
+        yield put ({
+            type: 'SET_SEARCH_RESULTS',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('Error in Saga GET all search:', error);
+    }
+}
+
 function* searchSaga() {
     yield takeLatest('SAGA/GET_SEARCH', getSearch);
+    yield takeLatest('SAGA/GET_ALL_EVENTS', getAllEvents);
   }
   
   export default searchSaga;

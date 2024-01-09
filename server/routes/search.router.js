@@ -56,4 +56,18 @@ router.get('/', async (req, res) => {
     catch (error) {console.log("error:", error)}
 })
 
+router.get('/all', (req, res) => {
+    const query = `
+    SELECT * FROM "events"
+    `
+    pool.query(query)
+        .then((result) => {
+        res.send(result.rows);
+        })
+        .catch((err) => {
+        console.log("Error in search router genre query:", err);
+        res.sendStatus(500);
+        });
+})
+
 module.exports = router;
