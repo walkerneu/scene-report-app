@@ -75,7 +75,7 @@ function SearchPage() {
             color="secondary"
             onClick={submitSearch}
           >
-            Submit
+            SEARCH
           </Button>
           </p>
         </div>

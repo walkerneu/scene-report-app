@@ -8,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 function EventItem ({ userEvent }){
     const history = useHistory();
     const imgClick = () => {
-        history.push(`/event/${userEvent.event_id}`);
+        history.push(`/event/${userEvent.id}`);
     }
     return (  
     <Card sx={{ maxWidth: 183 }}>

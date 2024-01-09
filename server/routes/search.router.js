@@ -10,7 +10,16 @@ router.get('/', async (req, res) => {
     let eventArray = []
     if (req.query.query !== ''){
     const textQuery = `
-    SELECT * FROM "events"
+    SELECT
+    "events"."id" AS "id",
+    "events"."title",
+    "events"."description",
+    "events"."event_photo_url",
+    "events"."event_time",
+    "events"."venue",
+    "events"."location",
+    "events"."creator_id"
+    FROM "events"
     JOIN "events_genres"
     ON "events"."id"="events_genres"."event_id"
     JOIN "genres"
@@ -34,7 +43,16 @@ router.get('/', async (req, res) => {
     }
     if (req.query.genre !== ""){
     const genreQuery = `
-    SELECT * FROM "events"
+    SELECT
+    "events"."id" AS "id",
+    "events"."title",
+    "events"."description",
+    "events"."event_photo_url",
+    "events"."event_time",
+    "events"."venue",
+    "events"."location",
+    "events"."creator_id" 
+    FROM "events"
     JOIN "events_genres"
     ON "events"."id"="events_genres"."event_id"
     JOIN "genres"

@@ -44,7 +44,15 @@ router.get("/created", (req, res) => {
 
 router.get("/user/:id", (req, res) => {
   const query = `
-      SELECT *
+      SELECT
+      "events"."id" AS "id",
+      "events"."title",
+      "events"."description",
+      "events"."event_photo_url",
+      "events"."event_time",
+      "events"."venue",
+      "events"."location",
+      "events"."creator_id"
         FROM "events"
         JOIN "attendance"
             ON "events"."id"="attendance"."event_id"
