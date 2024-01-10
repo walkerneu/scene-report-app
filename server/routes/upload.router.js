@@ -14,7 +14,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
   const venue = req.body.venue;
   const location = req.body.location;
   const userId = req.user.id;
-  const genreIdArray = req.body.genre_id;
+  const genreIdArray = req.body.genre_id.split(",");
 
   const eventQuery = `
     INSERT INTO "events" 
