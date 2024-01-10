@@ -14,7 +14,7 @@ function* addNewEvent(action){
         });
         yield action.payload.history.push(`/event/${response.data.id}`)
       } catch (error) {
-        console.log('fetchAllGenres error:', error);
+        console.log('Error in Saga add new event:', error);
       }
 }
 

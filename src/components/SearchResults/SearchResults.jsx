@@ -4,12 +4,6 @@ import EventItem from '../EventItem/EventItem';
 function SearchResults() {
   const user = useSelector((store) => store.user);
   const searchResults = useSelector(store => store.searchResults);
-  const results = []
-  searchResults.forEach(element => {
-    if(!results.includes(element.id)) {
-        results.push(element);
-    }
-  });
   console.log("results:", searchResults)
   const now = new Date ();
   const msPerDay = 24 * 60 * 60 * 1000; 

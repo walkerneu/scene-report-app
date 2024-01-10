@@ -28,9 +28,13 @@ function EditEvent() {
   const currentEvent = useSelector(store => store.currentEvent)
   const currentGenres = useSelector(store => store.currentGenres)
   const genres = useSelector((store) => store.genres);
+  let genreArray = []
+  currentGenres.map((genre) => {
+    genreArray.push(genre.id)
+})
 
   const [eventName, setEventName] = useState(currentEvent.title);
-  const [selectedGenre, setSelectedGenre] = useState(currentGenres);
+  const [selectedGenre, setSelectedGenre] = useState(genreArray);
   const [eventBio, setEventBio] = useState(currentEvent.description);
   const [eventTime, setEventTime] = useState(currentEvent.event_time);
   const [venue, setVenue] = useState(currentEvent.venue);
@@ -60,6 +64,7 @@ function EditEvent() {
     editForm.append('event_time', eventTime)
     editForm.append('venue', venue)
     editForm.append('location', cityState)
+    editForm.append('genre_id', selectedGenre)
     dispatch({
     type: 'SAGA/EDIT_EVENT',
     payload: { 
@@ -74,6 +79,7 @@ function EditEvent() {
     setSelectedGenre([]);
     history.push(`/event/${id}`)
   };
+  console.log("selectedGenre:", selectedGenre);
   return (
     <Card 
         sx={{ maxWidth: 800}} 
@@ -163,11 +169,7 @@ function EditEvent() {
       <Select
         multiple
         helperText="Please select event genres"
-        value={selectedGenre.map((genre) => {
-            let array = []
-            array.push(genre.id)
-            return array
-        })}
+        value={selectedGenre}
         label="genre"
         onChange={(event) => setSelectedGenre(event.target.value)}
       >

@@ -55,7 +55,7 @@ function AddEventPage() {
     setCityState('');
     setSelectedGenre([]);
   };
-  console.log("event time:", eventTime)
+  console.log("selectedGenre:", selectedGenre)
   return (
     <Card 
         sx={{ maxWidth: 800}} 
@@ -145,6 +145,7 @@ function AddEventPage() {
       <Select
         multiple
         helperText="Please select event genres"
+        placeholder="Select Genre"
         value={selectedGenre}
         label="genre"
         onChange={(event) => setSelectedGenre(event.target.value)}
