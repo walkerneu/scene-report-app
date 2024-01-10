@@ -23,9 +23,12 @@ function UserPage() {
       <section className="events">
       {userEvents.map(userEvent => {
         const eventTime = new Date (userEvent.event_time);
-        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) >= 0){
-        return (
-        <EventItem key={userEvent.id} userEvent={userEvent} />
+        console.log("Here's the difference in months:", (eventTime.getMonth() - now.getMonth()))
+        console.log("Here's the months:", eventTime.getMonth(), now.getMonth())
+        if (Math.round(eventTime.getTime() - now.getTime()) >= 0){
+            
+            return (
+            <EventItem key={userEvent.id} userEvent={userEvent} />
       )}
   })}
       </section>

@@ -29,7 +29,8 @@ router.get('/', async (req, res) => {
     OR 
     "description" ILIKE $1
     OR 
-    "venue" ILIKE $1);
+    "venue" ILIKE $1) 
+    AND "events"."event_time" > NOW();
     `
     await pool.query(textQuery, [`%${req.query.query}%`])
     .then((result) => {
@@ -57,7 +58,7 @@ router.get('/', async (req, res) => {
     ON "events"."id"="events_genres"."event_id"
     JOIN "genres"
     ON "events_genres"."genre_id"="genres"."id"
-    WHERE "genres"."id"=$1;
+    WHERE "genres"."id"=$1 AND "events"."event_time" > NOW();
     `
     await pool.query(genreQuery, [req.query.genre])
     .then((result) => {

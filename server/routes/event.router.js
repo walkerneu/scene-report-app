@@ -23,25 +23,6 @@ router.get("/id/:id", (req, res) => {
     });
 });
 
-router.get("/created", (req, res) => {
-  const query = `
-        SELECT * FROM "events"
-        WHERE "creator_id" = $1
-        ORDER BY "id" DESC
-        LIMIT 1;
-    `;
-  pool
-    .query(query, [req.user.id])
-    .then((result) => {
-      res.send(result.rows);
-      console.log("this is the recently created event", result.rows);
-    })
-    .catch((err) => {
-      console.log("Error in event router GET created:", err);
-      res.sendStatus(500);
-    });
-});
-
 router.get("/user/:id", (req, res) => {
   const query = `
       SELECT
@@ -56,7 +37,7 @@ router.get("/user/:id", (req, res) => {
         FROM "events"
         JOIN "attendance"
             ON "events"."id"="attendance"."event_id"
-        WHERE "attendance"."user_id" = $1;
+        WHERE "attendance"."user_id" = $1 AND "events"."event_time" > NOW();
     `;
   pool
     .query(query, [req.user.id])

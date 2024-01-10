@@ -60,16 +60,17 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
     });
 });
 
-router.put('/edit/:id', cloudinaryUpload.single("image"), async (req, res) => {
-    let eventPhoto
-        if (!req.file){
-            eventPhoto = req.body.event_photo_url
-        }
-        else {
-            eventPhoto = req.file.path
-        }
-    console.log("here's req.file:", req.file)
-    const query = `
+router.put("/edit/:id", cloudinaryUpload.single("image"), async (req, res) => {
+  const genreIdArray = req.body.genre_id.split(",");
+  let eventPhoto;
+  if (!req.file) {
+    eventPhoto = req.body.event_photo_url;
+  } else {
+    eventPhoto = req.file.path;
+  }
+  console.log("here's req.file:", req.file);
+  console.log("here's eventPhoto:", eventPhoto)
+  const eventQuery = `
     UPDATE "events"
     SET
     "title" = $1,
@@ -79,18 +80,58 @@ router.put('/edit/:id', cloudinaryUpload.single("image"), async (req, res) => {
     "venue" = $5,
     "location" = $6
     WHERE "id"=$7;
-    `
-    const sqlValues = [req.body.title, req.body.description, eventPhoto, req.body.event_time, req.body.venue, req.body.location, req.params.id]
-    pool
-    .query(query, sqlValues)
+    `;
+  const eventValues = [
+    req.body.title,
+    req.body.description,
+    eventPhoto,
+    req.body.event_time,
+    req.body.venue,
+    req.body.location,
+    req.params.id,
+  ];
+  pool
+    .query(eventQuery, eventValues)
     .then((result) => {
+      const deleteQuery = `
+        DELETE FROM "events_genres"
+        WHERE "event_id" = $1;
+        `;
+      pool
+        .query(deleteQuery, [req.params.id])
+        .then((result) => {
+            console.log("genreIdArray:", genreIdArray)
+          // Now handle the genre reference:
+          for (let genreId of genreIdArray) {
+            const genreQuery = `
+        INSERT INTO "events_genres" 
+          ("event_id", "genre_id")
+          VALUES
+          ($1, $2);
+      `;
+            const genreValues = [req.params.id, genreId];
+            console.log("genreValues:", genreValues)
+            pool
+              .query(genreQuery, genreValues)
+              .then((result) => {})
+              .catch((err) => {
+                // catch for second query
+                console.log(err);
+                res.sendStatus(500);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log("Error in event router DELETE event", err);
+          res.sendStatus(500);
+        });
       res.sendStatus(201);
     })
     .catch((err) => {
       console.log("Error in event router PUT route", err);
       res.sendStatus(500);
     });
-})
+});
 
 
 
