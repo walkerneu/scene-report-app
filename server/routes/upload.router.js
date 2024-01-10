@@ -108,7 +108,7 @@ router.put("/edit/:id", cloudinaryUpload.single("image"), async (req, res) => {
           ("event_id", "genre_id")
           VALUES
           ($1, $2);
-      `;
+        `;
             const genreValues = [req.params.id, genreId];
             console.log("genreValues:", genreValues)
             pool

@@ -15,20 +15,38 @@ function UserPage() {
   }, [])
   const userEvents = useSelector(store => store.userEvents);
   const now = new Date ();
-  const msPerDay = 24 * 60 * 60 * 1000; 
+  const msPerDay = 24 * 60 * 60 * 1000;
   
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
+      <h3>Your Events This Week:</h3>
       <section className="events">
       {userEvents.map(userEvent => {
         const eventTime = new Date (userEvent.event_time);
-        console.log("Here's the difference in months:", (eventTime.getMonth() - now.getMonth()))
-        console.log("Here's the months:", eventTime.getMonth(), now.getMonth())
-        if (Math.round(eventTime.getTime() - now.getTime()) >= 0){
-            
-            return (
-            <EventItem key={userEvent.id} userEvent={userEvent} />
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 7){    
+          return (
+          <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
+      </section>
+      <h3>Your Events This Month:</h3>
+      <section className="events">
+      {userEvents.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 30){    
+          return (
+          <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
+      </section>
+      <h3>Your Future Events:</h3>
+      <section className="events">
+      {userEvents.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) > 30){    
+          return (
+          <EventItem key={userEvent.id} userEvent={userEvent} />
       )}
   })}
       </section>
