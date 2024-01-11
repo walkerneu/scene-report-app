@@ -13,6 +13,10 @@ function* addNewEvent(action){
             data: action.payload.eventForm
         });
         yield action.payload.history.push(`/event/${response.data.id}`)
+        yield put ({
+            type: "SAGA/GET_USER_EVENTS",
+            payload: action.payload.id
+        })
       } catch (error) {
         console.log('Error in Saga add new event:', error);
       }

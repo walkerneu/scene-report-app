@@ -15,6 +15,7 @@ function AddEventPage() {
   useEffect(() => {
     dispatch({ type: "SAGA/GET_GENRES" });
   }, []);
+  const user = useSelector(store => store.user)
   const genres = useSelector((store) => store.genres);
   const [eventName, setEventName] = useState('');
   const [imgUpload, setImgUpload] = useState('');
@@ -45,7 +46,8 @@ function AddEventPage() {
     dispatch({
     type: 'SAGA/ADD_EVENT',
     payload: { eventForm: eventForm,
-                history: history
+                history: history,
+                id: user.id
     }});
     setImgUpload('');
     setEventName('');

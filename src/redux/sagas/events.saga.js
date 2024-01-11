@@ -27,11 +27,15 @@ function* attendEvent(action){
     try {
         const response = yield axios({
             method: "POST",
-            url: `/api/event/attend/${action.payload}`
+            url: `/api/event/attend/${action.payload.event}`
         })
         yield put ({
             type: "SAGA/GET_CURRENT_EVENT",
-            payload: action.payload
+            payload: action.payload.event
+        })
+        yield put ({
+            type: "SAGA/GET_USER_EVENTS",
+            payload: action.payload.user
         })
     } catch (error) {
         console.log('Heckin heck, error in Saga attend event', error)

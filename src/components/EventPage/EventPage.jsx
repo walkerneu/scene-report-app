@@ -41,15 +41,16 @@ function EventPage(){
       for (let userEvent of userEvents) {
         eventIdArray.push(userEvent.id);
       }
-    const isAttending = eventIdArray.includes(Number(id));
-    const [attending, setAttending] = useState(isAttending)
+    const [attending, setAttending] = useState(eventIdArray.includes(Number(id)))
     const goBack = () => {
         history.goBack();
       };
     const attend = () => {
         dispatch({
             type: "SAGA/ATTEND_EVENT",
-            payload: event.id
+            payload: {
+                event: event.id,
+                user: user.id}
         })
         setAttending(true);
     }
