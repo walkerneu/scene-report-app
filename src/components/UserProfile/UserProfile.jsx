@@ -5,8 +5,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActions } from "@mui/material";
+import { Button, CardActions, Box } from "@mui/material";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { center } from '@cloudinary/url-gen/qualifiers/textAlignment';
 
 function UserProfile(){
 
@@ -31,21 +32,27 @@ function UserProfile(){
     return (
         <div>
     <Card
-      sx={{ maxWidth: 950 }}
+      sx={{ maxWidth: 850, display: 'flex', alignContent: "center" }}
       className="description-box"
     >
-      <CardMedia
-        component="img"
-        image={currentUser && currentUser.profile_picture}
+      <img
+        src={currentUser && currentUser.profile_picture}
         alt={currentUser && currentUser.username}
+        width={300}
       />
+      
       <CardContent>
-        <Typography gutterBottom variant="h3" component="div">
-          Username: {currentUser && currentUser.username}
+        <Typography gutterBottom variant="h3" component="div" fontFamily={"helsinki"}>
+          {currentUser && currentUser.username}
         </Typography>
         <Typography variant="body">
-          Bio: {currentUser && currentUser.bio}
+          Bio:
         </Typography>
+        <p>
+        <Typography variant="body">
+          {currentUser && currentUser.bio}
+        </Typography>
+        </p>
         <Typography gutterBottom variant="h6" component="div">
           <a href={currentUser && currentUser.social_media_link}>Social Media Link</a>
         </Typography>

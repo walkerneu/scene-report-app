@@ -61,25 +61,37 @@ function EventPage(){
     const attendanceDisplay = () => {
         if (attendees.length > 1){
             return (
+                <>
                 <Typography 
                     variant="body2"
+                    fontFamily="helsinki"
                     onClick={goToAttendance}>
                     There are {attendees.length} people attending this event!
                 </Typography>
+                <Typography variant="body2" fontFamily="helsinki" onClick={goToAttendance}>
+                Click here to see the list!
+                </Typography>
+                </>
             )
         }
         else if (attendees.length === 1){
             return (
+                <>
                 <Typography 
                     variant="body2"
+                    fontFamily="helsinki"
                     onClick={goToAttendance}>
                     There is 1 person attending this event!
                 </Typography>
+                <Typography variant="body2" fontFamily="helsinki" onClick={goToAttendance}>
+                Click here to see the list!
+                </Typography>
+                </>
             )
         }
         else {
             return (
-                <Typography variant="body2">
+                <Typography variant="body2" fontFamily="helsinki">
                     There are no people attending this event!
                 </Typography>
             )
@@ -89,7 +101,7 @@ function EventPage(){
     return (
         <div>
     <Card
-      sx={{ width: 950 }}
+      sx={{ width: 950, fontFamily: "helsinki" }}
       className="description-box"
     >
       <CardMedia
@@ -99,29 +111,33 @@ function EventPage(){
         alt={event.title}
       />
       <CardContent>
-        <Typography gutterBottom variant="h3" component="div">
+        <Typography gutterBottom variant="h3" component="div" fontFamily="helsinki">
           {event.title}
         </Typography>
-        <Typography variant="h6">
-          {event.venue}
+        <Typography variant="h6" fontFamily="helsinki">
+          Location:
         </Typography>
-        <Typography variant="h6">
-          {event.location}
+        <Typography variant="h6" fontFamily="helsinki">
+        {event.venue}, {event.location}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography variant="h6" component="div" fontFamily="helsinki">
           {new Date(event.event_time).toLocaleString('en-us')}
           <p>There are {daysUntil} days until this event!</p>
         </Typography>
         <Typography variant="body">
+          Event Description:
+          <p>
           {event.description}
+          </p>
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography variant="h6" component="div" fontFamily="helsinki">
           Genres:
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
           {genres.map((genre) => (
             <span key={genre.id}> {genre.genre_name} /</span>
           ))}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          
         </Typography>
         {attendanceDisplay()}
       </CardContent>
