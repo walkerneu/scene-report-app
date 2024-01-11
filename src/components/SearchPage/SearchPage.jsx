@@ -4,6 +4,8 @@ import { Button, Select, MenuItem } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { DatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -15,6 +17,7 @@ function SearchPage() {
   console.log(genres)
   const [searchQuery, setSearchQuery] = useState("");
   const [genreQuery, setGenreQuery] = useState("");
+  const [timeQuery, setTimeQuery] = useState('');
   const submitSearch = () => {
     dispatch({
       type: "SAGA/GET_SEARCH",
@@ -30,6 +33,7 @@ function SearchPage() {
     });
     history.push("/searchResults");
   };
+  console.log("Time Query:", timeQuery)
   return (
     <>
       <div className="search-container">
@@ -69,6 +73,16 @@ function SearchPage() {
               </MenuItem>
             ))}
           </Select>
+          <p>
+      <Typography gutterBottom variant="overline" display="block">
+        Search by Date:
+      </Typography>
+      <DatePicker
+        label="Event Time"
+        value={timeQuery}
+        onChange={setTimeQuery}
+      />
+      </p>
           <p>
           <Button
             variant="contained"
