@@ -7,8 +7,13 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     console.log("heres req.query:", req.query)
+    let connection;
+    try {
+    connection = await pool.connect();
+
+    connection.query("BEGIN;");
     let eventArray = []
-    if (req.query.query !== ''){
+    if (req.query.query !== '' && req.query.genre === ''){
     const textQuery = `
     SELECT DISTINCT
     "events"."id" AS "id",
@@ -32,17 +37,10 @@ router.get('/', async (req, res) => {
     "venue" ILIKE $1) 
     AND "events"."event_time" > NOW();
     `
-    await pool.query(textQuery, [`%${req.query.query}%`])
-    .then((result) => {
-      console.log("text query result", result.rows)
-      eventArray = [...eventArray, ...result.rows]
-    })
-    .catch((err) => {
-      console.log("Error in search router text query:", err);
-      res.sendStatus(500);
-    });
+    const queryResult = await connection.query(textQuery, [`%${req.query.query}%`])    
+    eventArray = queryResult.rows
     }
-    if (req.query.genre !== ""){
+    else if (req.query.genre !== "" && req.query.query === ""){
     const genreQuery = `
     SELECT DISTINCT
     "events"."id" AS "id",
@@ -60,24 +58,56 @@ router.get('/', async (req, res) => {
     ON "events_genres"."genre_id"="genres"."id"
     WHERE "genres"."id"=$1 AND "events"."event_time" > NOW();
     `
-    await pool.query(genreQuery, [req.query.genre])
-    .then((result) => {
-      console.log("Genre query result:", result.rows)
-      eventArray = [...eventArray, ...result.rows]
-    })
-    .catch((err) => {
-      console.log("Error in search router genre query:", err);
-      res.sendStatus(500);
-    });
+    const genreResult = await connection.query(genreQuery, [req.query.genre])
+    eventArray = genreResult.rows
     }
+    else if (req.query.genre !== "" && req.query.query !== ""){
+    const fullQuery = `
+    SELECT DISTINCT
+    "events"."id" AS "id",
+    "events"."title",
+    "events"."description",
+    "events"."event_photo_url",
+    "events"."event_time",
+    "events"."venue",
+    "events"."location",
+    "events"."creator_id" 
+    FROM "events"
+    JOIN "events_genres"
+    ON "events"."id"="events_genres"."event_id"
+    JOIN "genres"
+    ON "events_genres"."genre_id"="genres"."id"
+    WHERE
+    ("title" ILIKE $1
+    OR 
+    "description" ILIKE $1
+    OR 
+    "venue" ILIKE $1)
+    AND 
+    "genres"."id"=$2 
+    AND 
+    "events"."event_time" > NOW();
+    `
+    const fullResult = await connection.query(fullQuery, [`%${req.query.query}%`, req.query.genre])
+    eventArray = fullResult.rows
+    }
+    connection.query("COMMIT;");
+    connection.release();
     console.log("Here's event array:", eventArray)
-    try {res.send(eventArray)}
-    catch (error) {console.log("error:", error)}
+    res.send(eventArray)
+}
+    catch (error) {
+        console.log("Error in search router query:", err);
+        connection.query("ROLLBACK;");
+        connection.release();
+        res.sendStatus(500);
+    }
 })
 
 router.get('/all', (req, res) => {
     const query = `
     SELECT * FROM "events"
+    WHERE "events"."event_time" > NOW();
     `
     pool.query(query)
         .then((result) => {

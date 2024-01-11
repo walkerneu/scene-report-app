@@ -77,10 +77,11 @@ function EventPage(){
                 <Typography 
                     variant="body2"
                     fontFamily="helsinki"
+                    className="pointer"
                     onClick={goToAttendance}>
                     There are {attendees.length} people attending this event!
                 </Typography>
-                <Typography variant="body2" fontFamily="helsinki" onClick={goToAttendance}>
+                <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
                 </Typography>
                 </>
@@ -92,10 +93,11 @@ function EventPage(){
                 <Typography 
                     variant="body2"
                     fontFamily="helsinki"
+                    className="pointer"
                     onClick={goToAttendance}>
                     There is 1 person attending this event!
                 </Typography>
-                <Typography variant="body2" fontFamily="helsinki" onClick={goToAttendance}>
+                <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
                 </Typography>
                 </>
