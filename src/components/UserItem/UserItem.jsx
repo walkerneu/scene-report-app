@@ -15,10 +15,8 @@ function UserItem ({ attendee }){
       <CardActionArea>
         <CardMedia
           component="img"
-          className="movie-media"
           image={attendee.profile_picture}
           alt={attendee.username}
-          data-testid="toDetails"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

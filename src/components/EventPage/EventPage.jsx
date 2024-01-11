@@ -19,9 +19,15 @@ function EventPage(){
           payload: id
         })
       }, [id])
-      
-    const user = useSelector((store) => store.user);
     const event = useSelector(store => store.currentEvent);
+    useEffect(() => {
+        dispatch({
+          type: "SAGA/GET_HOST",
+          payload: event.creator_id
+        })
+      }, [event])
+    const host = useSelector(store => store.currentHost)
+    const user = useSelector((store) => store.user);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
     const attendees = useSelector(store => store.eventAttendees)
@@ -30,11 +36,13 @@ function EventPage(){
     const msPerDay = 24 * 60 * 60 * 1000; 
     const daysUntil = Math.round((eventTime.getTime() - now.getTime()) / msPerDay)
     console.log("Here's the difference:", daysUntil)
+    console.log("here's the host:", host)
     let eventIdArray = [];
       for (let userEvent of userEvents) {
         eventIdArray.push(userEvent.id);
       }
     const isAttending = eventIdArray.includes(Number(id));
+    const [attending, setAttending] = useState(isAttending)
     const goBack = () => {
         history.goBack();
       };
@@ -43,7 +51,7 @@ function EventPage(){
             type: "SAGA/ATTEND_EVENT",
             payload: event.id
         })
-        history.replace(`/event/${id}`)
+        setAttending(true);
     }
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
@@ -124,6 +132,11 @@ function EventPage(){
           {new Date(event.event_time).toLocaleString('en-us')}
           <p>There are {daysUntil} days until this event!</p>
         </Typography>
+        <p>
+        <Typography variant="body" fontFamily="helsinki">
+        This event is hosted by: {host.username}
+        </Typography>
+        </p>
         <Typography variant="body">
           Event Description:
           <p>
@@ -142,8 +155,8 @@ function EventPage(){
         {attendanceDisplay()}
       </CardContent>
       <CardActions>
-      { isAttending ?
-        <Typography variant="body2">
+      { attending ?
+        <Typography variant="body2" fontFamily="helsinki">
             You are attending this event!
         </Typography>
         :
@@ -151,7 +164,6 @@ function EventPage(){
           size="small"
           color="primary"
           onClick={attend}
-          data-testid="toList"
         >
           Would you like to attend this event?
         </Button>
@@ -160,7 +172,6 @@ function EventPage(){
           size="small"
           color="primary"
           onClick={goBack}
-          data-testid="toList"
         >
           BACK
         </Button>

@@ -42,6 +42,20 @@ function* getCurrentUser(action){
     console.log('Shoot dang, error in Saga get user by id', error)
 }  
 }
+function* getCurrentHost(action){
+  try {
+    const response = yield axios({
+        method: "GET",
+        url: `/api/user/id/${action.payload}`
+    })
+    yield put ({
+        type: "SET_HOST",
+        payload: response.data[0]
+    })
+} catch (error) {
+    console.log('Shoot dang, error in Saga get host', error)
+}  
+}
 
 function* updateUserProfile(action){
   try {
@@ -65,6 +79,7 @@ function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('SAGA/GET_CURRENT_USER', getCurrentUser);
   yield takeLatest('SAGA/UPDATE_PROFILE', updateUserProfile);
+  yield takeLatest('SAGA/GET_HOST', getCurrentHost);
 }
 
 export default userSaga;

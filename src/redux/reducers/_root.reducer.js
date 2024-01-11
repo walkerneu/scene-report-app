@@ -8,6 +8,7 @@ import currentGenres from './currentGenres.reducer';
 import searchResults from './searchResults';
 import currentUser from './currentUser.reducer';
 import eventAttendees from './eventAttendees.reducer';
+import currentHost from './currentHost.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   searchResults,
   currentUser,
   eventAttendees,
-  
+  currentHost,
+
 });
 
 export default rootReducer;
