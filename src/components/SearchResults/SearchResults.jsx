@@ -9,15 +9,35 @@ function SearchResults() {
   const msPerDay = 24 * 60 * 60 * 1000; 
   return (
     <div className="container">
-      <h2>Search Results:</h2>
+      <h3>Events This Week:</h3>
       <section className="events">
-      {searchResults.map(result => {
-          const eventTime = new Date (result.event_time);
-          if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) >= 0){
+      {searchResults.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 7){    
           return (
-            <EventItem key={result.id} userEvent={result} />
-        )}      
-    })}
+          <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
+      </section>
+      <h3>Events This Month:</h3>
+      <section className="events">
+      {searchResults.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 30 && Math.round((eventTime.getTime() - now.getTime()) / msPerDay) > 7){    
+          return (
+          <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
+      </section>
+      <h3>Future Events:</h3>
+      <section className="events">
+      {searchResults.map(userEvent => {
+        const eventTime = new Date (userEvent.event_time);
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) > 30){    
+          return (
+          <EventItem key={userEvent.id} userEvent={userEvent} />
+      )}
+  })}
       </section>
     </div>
   );

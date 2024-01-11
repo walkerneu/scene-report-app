@@ -88,8 +88,23 @@ function Nav() {
               <MenuItem onClick={() => handleClose(5)}>About</MenuItem>
           </Menu>
           <Link to="/home">
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1, mr: 10, ml: 7 }}>
-            Scene Report: A DIY Events App
+          <Typography 
+            variant="h4" 
+            fontFamily="blockbuster"
+            fontSize={20}
+            color={'black'}
+            component="div" 
+            sx={{ flexGrow: 1, mr: 10, ml: 7, mb: 5, mt: 3}}>
+            Scene Report
+          </Typography>
+          <Typography 
+            variant="h6" 
+            fontFamily="blockbuster"
+            color={'black'}
+            fontSize={10}
+            component="div" 
+            sx={{ mr: 10, ml: 7, mb: 2}}>
+            Events from Your Community
           </Typography>
           </Link>
           <LogOutButton/>

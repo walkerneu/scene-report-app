@@ -34,7 +34,7 @@ function UserPage() {
       <section className="events">
       {userEvents.map(userEvent => {
         const eventTime = new Date (userEvent.event_time);
-        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 30){    
+        if (Math.round((eventTime.getTime() - now.getTime()) / msPerDay) <= 30 && Math.round((eventTime.getTime() - now.getTime()) / msPerDay) > 7){    
           return (
           <EventItem key={userEvent.id} userEvent={userEvent} />
       )}
