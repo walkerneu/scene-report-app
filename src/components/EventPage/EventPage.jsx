@@ -56,8 +56,11 @@ function EventPage(){
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
       };
-      const goToAttendance = () => {
+    const goToAttendance = () => {
         history.push(`/attendance`);
+      };
+    const goToCreator = () => {
+        history.push(`/user/${host.id}`);
       };
     const deleteEvent = () => {
         dispatch({
@@ -133,7 +136,7 @@ function EventPage(){
           <p>There are {daysUntil} days until this event!</p>
         </Typography>
         <p>
-        <Typography variant="body" fontFamily="helsinki">
+        <Typography variant="body" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
         This event is hosted by: {host.username}
         </Typography>
         </p>

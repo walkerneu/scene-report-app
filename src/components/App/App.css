@@ -11,6 +11,10 @@
   src: url("../../../public/helsinki.ttf");
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 html,
 body,
 #react-root {
