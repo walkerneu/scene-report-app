@@ -7,6 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import CommentItem from '../CommentItem/CommentItem';
+import TextField from "@mui/material/TextField";
 
 function EventPage(){
 
@@ -30,7 +32,8 @@ function EventPage(){
     const user = useSelector((store) => store.user);
     const genres = useSelector(store => store.currentGenres);
     const userEvents = useSelector(store => store.userEvents);
-    const attendees = useSelector(store => store.eventAttendees)
+    const attendees = useSelector(store => store.eventAttendees);
+    const comments = useSelector(store => store.eventComments)
     const now = new Date ();
     const eventTime = new Date (event.event_time);
     const msPerDay = 24 * 60 * 60 * 1000; 
@@ -42,6 +45,7 @@ function EventPage(){
         eventIdArray.push(userEvent.id);
       }
     const [attending, setAttending] = useState(eventIdArray.includes(Number(id)))
+    const [commentText, setCommentText] = useState('');
     const goBack = () => {
         history.goBack();
       };
@@ -69,6 +73,16 @@ function EventPage(){
             payload: event.id
         })
         history.push('/');
+    }
+    const addComment = () => {
+        dispatch({
+            type: 'SAGA/ADD_COMMENT',
+            payload: {
+                event: event.id,
+                user: user.id,
+                comment: commentText}
+        })
+        setCommentText('');
     }
     const attendanceDisplay = () => {
         if (attendees.length > 1){
@@ -111,7 +125,7 @@ function EventPage(){
             )
         }
     }
-    console.log("We got event:", event)
+    console.log("We got comments:", comments)
     return (
         <div>
     <Card
@@ -194,6 +208,27 @@ function EventPage(){
         ""
         }
       </CardActions>
+    </Card>
+    <h3>Comments:</h3>
+    <Card>
+        <Typography gutterBottom variant="overline" display="block">
+        Add a Comment:
+        </Typography>
+        <TextField
+            label="Comment"
+            multiline
+            width={500}
+            rows={3}
+            variant="filled"
+            value={commentText}
+            onChange={(event) => setCommentText(event.target.value)}
+        />
+        <Button size="small" color="primary" onClick={addComment}>
+          ADD COMMENT
+        </Button>
+        {comments && comments.map((comment) => (
+            <CommentItem key={comment.id} comment={comment}/>
+        ))}
     </Card>
         </div>
     )

@@ -19,6 +19,10 @@ function* getCurrentEvent(action){
             type: "SAGA/GET_ATTENDEES",
             payload: action.payload
         })
+        yield put ({
+            type: "SAGA/GET_COMMENTS",
+            payload: action.payload
+        })
     } catch (error) {
         console.log('Shoot dang, error in Saga get event by id', error)
     }

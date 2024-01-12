@@ -6,6 +6,7 @@ import genresSaga from './genres.saga';
 import uploadSaga from './upload.saga';
 import eventsSaga from './events.saga';
 import searchSaga from './search.saga';
+import commentsSaga from './comments.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     uploadSaga(),
     eventsSaga(),
     searchSaga(),
-    
+    commentsSaga(),
+
   ]);
 }
