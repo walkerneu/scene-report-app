@@ -63,7 +63,7 @@ function AddEventPage() {
         sx={{ maxWidth: 800}} 
         data-testid="movieDetails"
         className="description-box">
-      <Typography gutterBottom variant="h4" component="div" mt={5}>
+      <Typography gutterBottom variant="h4" component="div" mt={5} fontFamily={"helsinki"}>
         Add A New Event!
       </Typography>
         <p>

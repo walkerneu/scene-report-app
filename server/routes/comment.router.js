@@ -7,7 +7,7 @@ router.get('/all/:id', (req, res) => {
     const query = `
     SELECT * FROM "comments"
       WHERE "event_id"=$1
-      ORDER BY "created_at";
+      ORDER BY "created_at" DESC;
   `;
 pool
   .query(query, [req.params.id])
