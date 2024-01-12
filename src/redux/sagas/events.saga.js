@@ -66,6 +66,21 @@ function* getUsersEvents(action){
     }
 }
 
+function* getCurrentUserEvents(action){
+    try {
+        const response = yield axios({
+            method: "GET",
+            url: `/api/event/user/all/${action.payload}`
+        })
+        yield put({
+            type: 'SET_CURRENT_USER_EVENTS',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('Dog gawnit, error in Saga get current user events', error)
+    }
+}
+
 function* editEvent(action){
     try {
         const headers = {
@@ -104,6 +119,7 @@ function* eventsSaga() {
     yield takeLatest('SAGA/DELETE_EVENT', deleteEvent);
     yield takeLatest('SAGA/EDIT_EVENT', editEvent);
     yield takeLatest('SAGA/GET_ATTENDEES', getAttendees);
+    yield takeLatest('SAGA/GET_CURRENT_USER_EVENTS', getCurrentUserEvents);
   }
   
   export default eventsSaga;

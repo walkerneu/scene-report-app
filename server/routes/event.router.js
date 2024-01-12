@@ -51,6 +51,23 @@ router.get("/user/:id", (req, res) => {
     });
 });
 
+router.get("/user/all/:id", (req, res) => {
+    const query = `
+        SELECT * FROM "events"
+          WHERE "creator_id"=$1;
+      `;
+    pool
+      .query(query, [req.params.id])
+      .then((result) => {
+        res.send(result.rows);
+        console.log("users created Events from event router:", result.rows);
+      })
+      .catch((err) => {
+        console.log("Error in event router GET users created events:", err);
+        res.sendStatus(500);
+      });
+  });
+
 router.get("/attendees/:id", (req, res) => {
     const query = `
     SELECT
