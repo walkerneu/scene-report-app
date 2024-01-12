@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,6 +16,7 @@ import { useState } from "react";
 function Nav() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -37,12 +38,14 @@ function Nav() {
       history.push("/login");
     } else if (num === 7) {
       history.push(`/user/${user.id}`);
+    } else if (num === 8) {
+      dispatch({ type: 'LOGOUT' })
     }
   };
 
   return (
     <div className="nav">
-          <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: "flex", flexGrow: 2 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -68,6 +71,9 @@ function Nav() {
               "aria-labelledby": "basic-button",
             }}
           >
+            <MenuItem onClick={() => handleClose(1)}>Home</MenuItem>
+            <MenuItem onClick={() => handleClose(3)}>Search</MenuItem>
+            <MenuItem onClick={() => handleClose(5)}>About</MenuItem>
             {/* If no user is logged in, show these links */}
              {!user.id && (
                // If there's no user, show login/registration links
@@ -78,14 +84,12 @@ function Nav() {
             {/* If a user is logged in, show these links */}
             {user.id && (
               <div>
-              <MenuItem onClick={() => handleClose(1)}>Home</MenuItem>
               <MenuItem onClick={() => handleClose(2)}>Add an Event</MenuItem>
               <MenuItem onClick={() => handleClose(7)}>My Profile</MenuItem>
               <MenuItem onClick={() => handleClose(4)}>Info</MenuItem>
+              <MenuItem onClick={() => handleClose(8)}>Logout</MenuItem>
               </div>
             )}
-              <MenuItem onClick={() => handleClose(3)}>Search</MenuItem>
-              <MenuItem onClick={() => handleClose(5)}>About</MenuItem>
           </Menu>
           <Link to="/home">
           <Typography 
@@ -97,6 +101,7 @@ function Nav() {
             sx={{ flexGrow: 1, mr: 10, ml: 7, mb: 5, mt: 3}}>
             Scene Report
           </Typography>
+          <span>
           <Typography 
             variant="h6" 
             fontFamily="blockbuster"
@@ -106,8 +111,8 @@ function Nav() {
             sx={{ mr: 10, ml: 7, mb: 2}}>
             Events from Your Community
           </Typography>
+          </span>
           </Link>
-          <LogOutButton/>
         </Toolbar>
       </AppBar>
     </Box>
