@@ -141,3 +141,10 @@ input {
   max-height: 850;
   max-width: 850;
 }
+
+.event-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.5rem;
+}

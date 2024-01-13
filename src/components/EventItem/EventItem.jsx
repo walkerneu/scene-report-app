@@ -11,19 +11,17 @@ function EventItem ({ userEvent }){
         history.push(`/event/${userEvent.id}`);
     }
     return (  
-    <Card sx={{ maxWidth: 450, display: "flex", flexDirection: "row", alignContent: "center" }} onClick={imgClick}>
+    <Card sx={{ width: 1200, display: "flex", flexDirection: "row"}} onClick={imgClick}>
       <CardActionArea>
+        <div className="event-item">
         <img
           width={150}
           justifyContent="left"
           src={userEvent.event_photo_url}
           alt={userEvent.title}
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div" fontFamily={"helsinki"} justifyContent={"right"}>
-            {userEvent.title}
-          </Typography>
-        </CardContent>
+        <body>{userEvent.title}</body>
+        </div>
       </CardActionArea>
     </Card>
     )
