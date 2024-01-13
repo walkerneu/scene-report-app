@@ -11,18 +11,28 @@ function UserItem ({ attendee }){
         history.push(`/user/${attendee.id}`);
     }
     return (  
-    <Card sx={{ maxWidth: 183 }} onClick={imgClick}>
+    <Card sx={{ 
+            maxWidth: 183,
+            width: 1200, 
+            display: "flex", 
+            flexDirection: "row", 
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite",
+            outline: "#e6855f solid 3px",  
+            justifyContent: "space-between",
+            gap: 2
+            }} 
+        onClick={imgClick}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          image={attendee.profile_picture}
+        <img
+          className="item-img"
+          width={150}
+          src={attendee.profile_picture}
           alt={attendee.username}
-        />
-        <CardContent>
+        />  
           <Typography gutterBottom variant="h5" component="div">
             {attendee.username}
           </Typography>
-        </CardContent>
       </CardActionArea>
     </Card>
     )

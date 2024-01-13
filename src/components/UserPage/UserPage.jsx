@@ -73,10 +73,8 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       {homeDisplay()}
-      <LogOutButton className="btn" />
     </div>
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;

@@ -158,6 +158,11 @@ input {
   color: darkgray;
 }
 
-blah {
+.item-img {
+  padding: 8px;
+  margin-right: 10px;
+}
+
+.test {
   color:#e6855f
 }

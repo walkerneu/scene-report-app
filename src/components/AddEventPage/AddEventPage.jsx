@@ -60,9 +60,16 @@ function AddEventPage() {
   console.log("selectedGenre:", selectedGenre)
   return (
     <Card 
-        sx={{ maxWidth: 800}} 
-        data-testid="movieDetails"
-        className="description-box">
+        sx={{ 
+            maxWidth: 800,
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#e6855f solid 10px",
+            ml: 10,
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center'
+            }}>
       <Typography gutterBottom variant="h4" component="div" mt={5} fontFamily={"helsinki"}>
         Add A New Event!
       </Typography>
@@ -71,7 +78,7 @@ function AddEventPage() {
         Enter Event Title:
       </Typography>
       <TextField
-        id="filled-multiline-flexible"
+        color="secondary"
         label="Event Title"
         placeholder="Event Title"
         multiline

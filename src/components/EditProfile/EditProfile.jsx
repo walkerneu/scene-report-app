@@ -37,9 +37,16 @@ function EditProfile() {
   };
   return (
     <Card
-      sx={{ maxWidth: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-      data-testid="movieDetails"
-      className="description-box"
+      sx={{ 
+        maxWidth: 800, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center',
+        backgroundColor: "#2e2e2e", 
+        color: "antiquewhite", 
+        outline: "#e6855f solid 10px",
+        ml: 10
+        }}
     >
       <Typography gutterBottom variant="h4" component="div" mt={5}>
         Edit You Profile!
@@ -49,7 +56,6 @@ function EditProfile() {
           Edit Username:
         </Typography>
         <TextField
-          id="filled-multiline-flexible"
           label="username"
           placeholder="username"
           multiline
@@ -64,7 +70,6 @@ function EditProfile() {
           Edit Bio:
         </Typography>
         <TextField
-          id="filled-multiline-static"
           label="Your Bio"
           multiline
           rows={6}
@@ -78,7 +83,6 @@ function EditProfile() {
           Edit Social Media Link:
         </Typography>
         <TextField
-          id="filled-multiline-static"
           label="Social Media Link"
           multiline
           rows={2}

@@ -7,7 +7,9 @@ import {
 } from 'react-router-dom';
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,6 +36,12 @@ import EditProfile from '../EditProfile/EditProfile';
 
 import './App.css';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 function App() {
   const dispatch = useDispatch();
 
@@ -44,6 +52,8 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
     <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div>
@@ -189,6 +199,7 @@ function App() {
       </div>
     </Router>
     </LocalizationProvider>
+    </ThemeProvider>
   );
 }
 

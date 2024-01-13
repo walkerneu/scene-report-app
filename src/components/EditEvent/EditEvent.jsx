@@ -82,9 +82,17 @@ function EditEvent() {
   console.log("selectedGenre:", selectedGenre);
   return (
     <Card 
-        sx={{ maxWidth: 800}} 
-        data-testid="movieDetails"
-        className="description-box">
+        sx={{ 
+            maxWidth: 800,
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#e6855f solid 10px",
+            ml: 10,
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center'
+        }} 
+       >
       <Typography gutterBottom variant="h4" component="div" mt={5}>
         Edit Your Event:
       </Typography>
@@ -93,7 +101,6 @@ function EditEvent() {
         Event Title:
       </Typography>
       <TextField
-        id="filled-multiline-flexible"
         label="Event Title"
         placeholder="Event Title"
         multiline

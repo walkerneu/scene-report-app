@@ -25,6 +25,7 @@ function EventItem ({ userEvent }){
       <CardActionArea>
         <div className="event-item">
         <img
+          className="item-img"
           width={150}
           src={userEvent.event_photo_url}
           alt={userEvent.title}
@@ -33,7 +34,7 @@ function EventItem ({ userEvent }){
         <p>
         {new Date(userEvent.event_time).toLocaleDateString('en-us')}
         </p>
-        <body>{userEvent.title}</body>
+        {userEvent.title}
         </div>
         </div>
       </CardActionArea>
