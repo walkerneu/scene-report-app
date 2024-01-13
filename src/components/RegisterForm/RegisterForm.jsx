@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from '@mui/material';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [bio, setBio] = useState('');
-  const [socialMedia, setSocialMedia] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -23,7 +21,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="form-control" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -54,40 +52,15 @@ function RegisterForm() {
           />
         </label>
       </div>
-      {/* <div>
-        <label htmlFor="bio">
-          Add a Bio *Not Required*:
-          <input
-            type="text"
-            name="bio"
-            value={bio}
-            onChange={(event) => setBio(event.target.value)}
-          />
-        </label>
-      </div>
       <div>
-        <label htmlFor="social-media">
-          Add a Link to a Social Media account *Not Required*:
-          <input
-            type="text"
-            name="social-media"
-            value={socialMedia}
-            onChange={(event) => setSocialMedia(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="profile-picture">
-          Upload a Profile Picture *Not Required*:
-          <input
-            type="file"
-            name="profile-picture"
-            onChange={(event) => setProfilePicture(event.target.files[0])}
-          />
-        </label>
-      </div> */}
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+      <Button 
+          variant="contained" 
+          color="success"
+          type="submit"
+          value="Log In"
+          >
+        Submit
+      </Button>
       </div>
     </form>
   );

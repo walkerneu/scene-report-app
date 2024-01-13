@@ -1,14 +1,43 @@
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { useEffect } from 'react';
 import EventItem from '../EventItem/EventItem';
 
 function SearchResults() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "SAGA/GET_GENRES" })
+  }, []);
   const user = useSelector((store) => store.user);
   const searchResults = useSelector(store => store.searchResults);
+  const currentQuery = useSelector(store => store.currentQuery);
+  const genres = useSelector(store => store.genres);
   console.log("results:", searchResults)
   const now = new Date ();
-  const msPerDay = 24 * 60 * 60 * 1000; 
+  const msPerDay = 24 * 60 * 60 * 1000;
+  console.log("Current Query is:", currentQuery)
+  const queryDisplay = () => {
+    return (
+        <>
+        <h2>
+            Showing results 
+            {currentQuery.query !== '' ?
+                <span> matching "{currentQuery.query}"</span>
+            :
+            ''}
+            {genres.map((genre) => {
+                if (genre.id === currentQuery.genre){
+                    return (
+                        <span> tagged as {genre.genre_name}</span>
+                    )
+                }
+            })}
+        </h2>
+        </>
+    )
+  }
   return (
     <div className="container">
+      {queryDisplay()}
       <h3>Events This Week:</h3>
       <section className="events">
       {searchResults.map(userEvent => {

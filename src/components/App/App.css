@@ -163,6 +163,12 @@ input {
   margin-right: 10px;
 }
 
+.form-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .test {
   color:#e6855f
 }
