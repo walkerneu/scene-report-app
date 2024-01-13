@@ -11,7 +11,11 @@ function CommentItem ({comment}){
         history.push(`/user/${comment.user_id}`);
     }
     return (  
-    <Card sx={{ maxWidth: 800, backgroundColor: "#2e2e2e", color: "antiquewhite" }}>
+    <Card sx={{ 
+            maxWidth: 800, 
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#4CAF50 solid 5px"}}>
         <CardContent>
         <CardActionArea>
           <Typography gutterBottom fontFamily="helsinki" variant="body" component="div" onClick={userClick}>

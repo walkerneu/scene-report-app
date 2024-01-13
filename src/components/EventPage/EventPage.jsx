@@ -147,6 +147,9 @@ function EventPage(){
         <Typography variant="h6" fontFamily="helsinki">
         {event.venue}, {event.location}
         </Typography>
+        <Typography className='info-text' variant="h6" fontFamily="helsinki">
+          Time:
+        </Typography>
         <Typography variant="h6" component="div" fontFamily="helsinki">
           {new Date(event.event_time).toLocaleString('en-us')}
           <p>There are {daysUntil} days until this event!</p>
@@ -156,8 +159,10 @@ function EventPage(){
         <span className='info-text'>Hosted by:</span> {host.username}
         </Typography>
         </p>
+        <Typography className='info-text' variant="h6" fontFamily="helsinki">
+          Description:
+        </Typography>
         <Typography variant="body">
-          <span className='info-text'>Description:</span>
           <p>
           {event.description}
           </p>
@@ -209,7 +214,16 @@ function EventPage(){
       </CardActions>
     </Card>
     <h3>Comments:</h3>
-    <Card sx={{backgroundColor: "#2e2e2e", color: "antiquewhite", outline: "#4CAF50 solid 10px", ml: 10}}>
+    <Card sx={{
+            maxWidth: 950, 
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#4CAF50 solid 10px", 
+            ml: 10,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            alignItems: "center" }}>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>
