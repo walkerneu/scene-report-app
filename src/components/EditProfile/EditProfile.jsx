@@ -37,7 +37,7 @@ function EditProfile() {
   };
   return (
     <Card
-      sx={{ maxWidth: 600 }}
+      sx={{ maxWidth: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       data-testid="movieDetails"
       className="description-box"
     >

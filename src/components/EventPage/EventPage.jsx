@@ -132,10 +132,9 @@ function EventPage(){
       sx={{ width: 950, fontFamily: "helsinki" }}
       className="description-box"
     >
-      <CardMedia
-        component="img"
+      <img
         className='event-img'
-        image={event.event_photo_url}
+        src={event.event_photo_url}
         alt={event.title}
       />
       <CardContent>

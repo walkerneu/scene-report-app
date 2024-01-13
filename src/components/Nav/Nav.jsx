@@ -40,6 +40,7 @@ function Nav() {
       history.push(`/user/${user.id}`);
     } else if (num === 8) {
       dispatch({ type: 'LOGOUT' })
+      history.push('/user')
     }
   };
 

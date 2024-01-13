@@ -138,5 +138,6 @@ input {
 }
 
 .event-img {
-  width: 600;
+  max-height: 850;
+  max-width: 850;
 }

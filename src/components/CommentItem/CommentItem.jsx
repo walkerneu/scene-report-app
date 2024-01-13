@@ -14,10 +14,10 @@ function CommentItem ({comment}){
     <Card sx={{ maxWidth: 800 }}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom fontFamily="helsinki" variant="h6" component="div" onClick={userClick}>
+          <Typography gutterBottom fontFamily="helsinki" variant="body" component="div" onClick={userClick}>
             {comment.username} posted at {new Date(comment.created_at).toLocaleString('en-us')}:
           </Typography>
-          <Typography variant="body" fontFamily="helsinki">
+          <Typography variant="h6" fontFamily="helsinki">
           <p>
           {comment.comment}
           </p>
