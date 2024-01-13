@@ -129,7 +129,13 @@ function EventPage(){
     return (
         <div>
     <Card
-      sx={{ maxWidth: 950, fontFamily: "helsinki", backgroundColor: "#2e2e2e", color: "antiquewhite", outline: "#4CAF50 solid 10px", ml: 10 }}
+      sx={{ 
+            width: 950, 
+            fontFamily: "helsinki", 
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#e6855f solid 10px", 
+            ml: 10 }}
       className="description-box"
     >
       <img
@@ -162,8 +168,8 @@ function EventPage(){
         <Typography className='info-text' variant="h6" fontFamily="helsinki">
           Description:
         </Typography>
-        <Typography variant="body">
-          <p>
+        <Typography variant="body" fontFamily="helsinki">
+            <p>
           {event.description}
           </p>
         </Typography>
@@ -213,17 +219,17 @@ function EventPage(){
         }
       </CardActions>
     </Card>
-    <h3>Comments:</h3>
     <Card sx={{
-            maxWidth: 950, 
+            width: 950, 
             backgroundColor: "#2e2e2e", 
             color: "antiquewhite", 
-            outline: "#4CAF50 solid 10px", 
+            outline: "#e6855f solid 10px", 
             ml: 10,
             display: "flex",
             flexDirection: "column",
             gap: 2,
-            alignItems: "center" }}>
+            mt: 8}}>
+        <h3>Comments:</h3>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>

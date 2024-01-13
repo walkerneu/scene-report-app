@@ -15,7 +15,8 @@ function CommentItem ({comment}){
             maxWidth: 800, 
             backgroundColor: "#2e2e2e", 
             color: "antiquewhite", 
-            outline: "#4CAF50 solid 5px"}}>
+            outline: "#e6855f solid 5px",
+            ml: 10}}>
         <CardContent>
         <CardActionArea>
           <Typography gutterBottom fontFamily="helsinki" variant="body" component="div" onClick={userClick}>

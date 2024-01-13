@@ -46,7 +46,7 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Box sx={{ display: "flex", flexGrow: 2 }}>
+      <Box sx={{ display: "flex", flexGrow: 2, backgroundColor: "#e6855f",  }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

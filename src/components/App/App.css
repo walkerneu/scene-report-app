@@ -141,7 +141,10 @@ input {
 }
 
 .event-img {
-  height: 400;
+  padding: 30px;
+  max-width: 800px;
+  max-height: 800px;
+  
 }
 
 .event-item {
@@ -153,4 +156,8 @@ input {
 
 .info-text {
   color: darkgray;
+}
+
+blah {
+  color:#e6855f
 }
