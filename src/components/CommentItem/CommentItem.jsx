@@ -12,18 +12,18 @@ function CommentItem ({comment}){
     }
     return (  
     <Card sx={{ maxWidth: 800, backgroundColor: "#2e2e2e", color: "antiquewhite" }}>
-      <CardActionArea>
         <CardContent>
+        <CardActionArea>
           <Typography gutterBottom fontFamily="helsinki" variant="body" component="div" onClick={userClick}>
             {comment.username} posted at {new Date(comment.created_at).toLocaleString('en-us')}:
           </Typography>
+          </CardActionArea>
           <Typography variant="h6" fontFamily="helsinki">
           <p>
           {comment.comment}
           </p>
         </Typography>
         </CardContent>
-      </CardActionArea>
     </Card>
     )
 }

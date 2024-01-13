@@ -129,7 +129,7 @@ function EventPage(){
     return (
         <div>
     <Card
-      sx={{ width: 950, fontFamily: "helsinki", backgroundColor: "#2e2e2e", color: "antiquewhite" }}
+      sx={{ maxWidth: 950, fontFamily: "helsinki", backgroundColor: "#2e2e2e", color: "antiquewhite", outline: "#4CAF50 solid 10px", ml: 10 }}
       className="description-box"
     >
       <img
@@ -209,7 +209,7 @@ function EventPage(){
       </CardActions>
     </Card>
     <h3>Comments:</h3>
-    <Card sx={{backgroundColor: "#2e2e2e", color: "antiquewhite"}}>
+    <Card sx={{backgroundColor: "#2e2e2e", color: "antiquewhite", outline: "#4CAF50 solid 10px", ml: 10}}>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>

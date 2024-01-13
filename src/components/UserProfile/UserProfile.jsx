@@ -37,7 +37,7 @@ function UserProfile(){
     return (
         <div>
     <Card
-      sx={{ maxWidth: 850, display: 'flex', alignContent: "center" }}
+      sx={{ maxWidth: 850, display: 'flex', backgroundColor: "#2e2e2e", color: "antiquewhite"}}
       className="description-box"
     >
       <img
@@ -62,8 +62,8 @@ function UserProfile(){
           <a href={currentUser && currentUser.social_media_link}>Social Media Link</a>
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
+    </Card>
+    <Button
           size="small"
           color="primary"
           onClick={goBack}
@@ -80,17 +80,15 @@ function UserProfile(){
         :
         ""
         }
-      </CardActions>
-    </Card>
     <h3>{currentUser && currentUser.username} is hosting these upcoming events:</h3>
     <Card
-      sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap"}}
+      sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
     >
         {userEvents.map(userEvent => {
             const eventTime = new Date (userEvent.event_time);
             if (eventTime.getTime() > now.getTime()){
                 return (
-                    <Card sx={{maxWidth: 100}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
                     <img
                     src={userEvent.event_photo_url}
                     alt={userEvent.title}
@@ -104,13 +102,13 @@ function UserProfile(){
     </Card>
     <h3>{currentUser && currentUser.username} hosted these past events:</h3>
     <Card
-      sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap"}}
+      sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
     >
         {userEvents.map(userEvent => {
             const eventTime = new Date (userEvent.event_time);
             if (eventTime.getTime() < now.getTime()){
                 return (
-                    <Card sx={{maxWidth: 100}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
                     <img
                     src={userEvent.event_photo_url}
                     alt={userEvent.title}

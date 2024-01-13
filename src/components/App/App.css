@@ -141,8 +141,7 @@ input {
 }
 
 .event-img {
-  max-height: 850;
-  max-width: 850;
+  height: 400;
 }
 
 .event-item {
