@@ -11,7 +11,7 @@ function EventItem ({ userEvent }){
         history.push(`/event/${userEvent.id}`);
     }
     return (  
-    <Card sx={{ width: 1200, display: "flex", flexDirection: "row"}} onClick={imgClick}>
+    <Card sx={{ width: 1200, display: "flex", flexDirection: "row", backgroundColor: "#2e2e2e"}} onClick={imgClick}>
       <CardActionArea>
         <div className="event-item">
         <img

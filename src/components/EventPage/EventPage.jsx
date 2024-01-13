@@ -93,7 +93,7 @@ function EventPage(){
                     fontFamily="helsinki"
                     className="pointer"
                     onClick={goToAttendance}>
-                    There are {attendees.length} people attending this event!
+                    There are {attendees.length} people attending
                 </Typography>
                 <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
@@ -109,7 +109,7 @@ function EventPage(){
                     fontFamily="helsinki"
                     className="pointer"
                     onClick={goToAttendance}>
-                    There is 1 person attending this event!
+                    There is 1 person attending
                 </Typography>
                 <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
@@ -120,7 +120,7 @@ function EventPage(){
         else {
             return (
                 <Typography variant="body2" fontFamily="helsinki">
-                    There are no people attending this event!
+                    There is no one attending
                 </Typography>
             )
         }
@@ -129,7 +129,7 @@ function EventPage(){
     return (
         <div>
     <Card
-      sx={{ width: 950, fontFamily: "helsinki" }}
+      sx={{ width: 950, fontFamily: "helsinki", backgroundColor: "#2e2e2e", color: "antiquewhite" }}
       className="description-box"
     >
       <img
@@ -141,7 +141,7 @@ function EventPage(){
         <Typography gutterBottom variant="h3" component="div" fontFamily="helsinki">
           {event.title}
         </Typography>
-        <Typography variant="h6" fontFamily="helsinki">
+        <Typography className='info-text' variant="h6" fontFamily="helsinki">
           Location:
         </Typography>
         <Typography variant="h6" fontFamily="helsinki">
@@ -153,17 +153,17 @@ function EventPage(){
         </Typography>
         <p>
         <Typography variant="body" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
-        This event is hosted by: {host.username}
+        <span className='info-text'>Hosted by:</span> {host.username}
         </Typography>
         </p>
         <Typography variant="body">
-          Event Description:
+          <span className='info-text'>Description:</span>
           <p>
           {event.description}
           </p>
         </Typography>
         <Typography variant="h6" component="div" fontFamily="helsinki">
-          Genres:
+        <span className='info-text'>Genres:</span>
           {genres.map((genre) => (
             <span key={genre.id}> {genre.genre_name} /</span>
           ))}
@@ -209,7 +209,7 @@ function EventPage(){
       </CardActions>
     </Card>
     <h3>Comments:</h3>
-    <Card>
+    <Card sx={{backgroundColor: "#2e2e2e", color: "antiquewhite"}}>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>

@@ -15,11 +15,14 @@
   cursor: pointer;
 }
 
+
 html,
 body,
 #react-root {
   height: 100%;
   font-family: "helsinki";
+  background-color: #2e2e2e;
+  color: antiquewhite
 }
 
 body {
@@ -147,4 +150,8 @@ input {
   flex-direction: row;
   align-items: center;
   font-size: 1.5rem;
+}
+
+.info-text {
+  color: darkgray;
 }
