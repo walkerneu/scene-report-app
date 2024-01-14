@@ -23,7 +23,8 @@ function SearchPage() {
       type: "SAGA/GET_SEARCH",
       payload: {
         query: searchQuery,
-        genre: genreQuery}
+        genre: genreQuery,
+        time: new Date(timeQuery).toLocaleDateString()}
     });
     history.push("/searchResults");
   };

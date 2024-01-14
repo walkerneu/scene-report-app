@@ -27,7 +27,7 @@ function SearchResults() {
             {genres.map((genre) => {
                 if (genre.id === currentQuery.genre){
                     return (
-                        <span> tagged as {genre.genre_name}</span>
+                        <span key={genre.id}> tagged as {genre.genre_name}</span>
                     )
                 }
             })}

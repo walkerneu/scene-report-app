@@ -91,13 +91,22 @@ router.get('/', async (req, res) => {
     const fullResult = await connection.query(fullQuery, [`%${req.query.query}%`, req.query.genre])
     eventArray = fullResult.rows
     }
+    if (req.query.time !== '12/31/1969'){
+        const timeQuery = `
+        SELECT * FROM "events"
+            WHERE 
+            to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp $1, 'MM/DD/YYYY');
+        `
+        const timeResult = await connection.query(timeQuery, [req.query.time])
+        eventArray = timeResult.rows
+    }
     connection.query("COMMIT;");
     connection.release();
     console.log("Here's event array:", eventArray)
     res.send(eventArray)
 }
     catch (error) {
-        console.log("Error in search router query:", err);
+        console.log("Error in search router query:", error);
         connection.query("ROLLBACK;");
         connection.release();
         res.sendStatus(500);
