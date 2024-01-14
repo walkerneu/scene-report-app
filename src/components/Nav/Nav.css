@@ -3,10 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  /* -webkit-text-fill-color: white;
+  -webkit-text-stroke: 3px black; */
   margin: 0 0 30px;
-  background-color: #00acb0;
-  overflow: hidden;
   /* -webkit-text-fill-color: white; */
 }
 

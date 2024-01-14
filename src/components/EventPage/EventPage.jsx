@@ -74,6 +74,16 @@ function EventPage(){
         })
         history.push('/');
     }
+    const goToGenre = (genreId) => {
+        dispatch({
+            type: 'SAGA/GET_SEARCH',
+            payload: {
+                query: '',
+                genre: genreId
+            }
+        })
+        history.push('/searchResults')
+    }
     const addComment = () => {
         dispatch({
             type: 'SAGA/ADD_COMMENT',
@@ -176,7 +186,12 @@ function EventPage(){
         <Typography variant="h6" component="div" fontFamily="helsinki">
         <span className='info-text'>Genres:</span>
           {genres.map((genre) => (
-            <span key={genre.id}> {genre.genre_name} /</span>
+            <span 
+                key={genre.id}
+                onClick={() => goToGenre(genre.id)}
+                className='pointer'> 
+                    {genre.genre_name} /
+            </span>
           ))}
         </Typography>
         <Typography variant="body2" color="text.secondary">
