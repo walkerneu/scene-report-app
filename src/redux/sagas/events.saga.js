@@ -89,7 +89,7 @@ function* getCurrentUserAttendance(action){
     try {
         const response = yield axios({
             method: "GET",
-            url: `/api/event/user/${action.payload}`
+            url: `/api/event/user/attendance/${action.payload}`
         })
         yield put ({
             type: "SET_CURRENT_USER_ATTENDANCE",

@@ -67,6 +67,39 @@ router.get("/user/all/:id", (req, res) => {
         res.sendStatus(500);
       });
   });
+  
+router.get("/user/attendance/:id", (req, res) => {
+const query = `
+    SELECT
+    "events"."id" AS "id",
+    "events"."title",
+    "events"."description",
+    "events"."event_photo_url",
+    "events"."event_time",
+    "events"."venue",
+    "events"."location",
+    "events"."creator_id"
+        FROM "events"
+        JOIN "attendance"
+            ON "events"."id"="attendance"."event_id"
+        WHERE 
+            "attendance"."user_id" = $1 
+            AND 
+            "events"."event_time" > NOW()
+            AND
+            "events"."creator_id" != $1;
+    `;
+pool
+    .query(query, [req.params.id])
+    .then((result) => {
+    res.send(result.rows);
+    console.log("user attendance from event router:", result.rows);
+    })
+    .catch((err) => {
+    console.log("Error in event router GET user events:", err);
+    res.sendStatus(500);
+    });
+});
 
 router.get("/attendees/:id", (req, res) => {
     const query = `

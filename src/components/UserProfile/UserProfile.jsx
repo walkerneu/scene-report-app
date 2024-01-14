@@ -38,6 +38,23 @@ function UserProfile(){
     console.log("attendance:", userAttendance);
     return (
         <div>
+        <Button
+          size="small"
+          color="primary"
+          onClick={goBack}
+          data-testid="toList"
+        >
+          BACK
+        </Button>
+        { currentUser && currentUser.id === user.id ?
+        <>
+        <Button size="small" color="primary" onClick={goToEdit}>
+          Would you like to edit your profile?
+        </Button>
+        </>
+        :
+        ""
+        }
     <Card
       sx={{ maxWidth: 850, display: 'flex', backgroundColor: "#2e2e2e", color: "antiquewhite"}}
       className="description-box"
@@ -65,23 +82,6 @@ function UserProfile(){
         </Typography>
       </CardContent>
     </Card>
-    <Button
-          size="small"
-          color="primary"
-          onClick={goBack}
-          data-testid="toList"
-        >
-          BACK
-        </Button>
-        { currentUser && currentUser.id === user.id ?
-        <>
-        <Button size="small" color="primary" onClick={goToEdit}>
-          EDIT
-        </Button>
-        </>
-        :
-        ""
-        }
     { userEvents.length > 0 ?
     <>
     <h3>{currentUser && currentUser.username} is hosting these upcoming events:</h3>
@@ -108,6 +108,8 @@ function UserProfile(){
     :
     ""
     }
+    { userAttendance.length > 0 ?
+    <>
     <h3>{currentUser && currentUser.username} is attending these upcoming events:</h3>
     <Card
       sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
@@ -125,6 +127,12 @@ function UserProfile(){
                 )
         })}
     </Card>
+    </>
+    :
+    ""
+    }
+    { userEvents.length > 0 ?
+    <>
     <h3>{currentUser && currentUser.username} hosted these past events:</h3>
     <Card
       sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
@@ -145,7 +153,11 @@ function UserProfile(){
             }
         })}
     </Card>
-        </div>
+    </>
+    :
+    ""
+    }
+    </div>
     )
 }
 
