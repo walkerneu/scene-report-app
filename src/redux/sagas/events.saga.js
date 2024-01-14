@@ -85,6 +85,21 @@ function* getCurrentUserEvents(action){
     }
 }
 
+function* getCurrentUserAttendance(action){
+    try {
+        const response = yield axios({
+            method: "GET",
+            url: `/api/event/user/${action.payload}`
+        })
+        yield put ({
+            type: "SET_CURRENT_USER_ATTENDANCE",
+            payload: response.data
+        })
+    } catch (error) {
+        console.log("Ahh green day! Error in saga get current user attendance", error)
+    }
+}
+
 function* editEvent(action){
     try {
         const headers = {
@@ -124,6 +139,7 @@ function* eventsSaga() {
     yield takeLatest('SAGA/EDIT_EVENT', editEvent);
     yield takeLatest('SAGA/GET_ATTENDEES', getAttendees);
     yield takeLatest('SAGA/GET_CURRENT_USER_EVENTS', getCurrentUserEvents);
+    yield takeLatest('SAGA/GET_CURRENT_USER_ATTENDANCE', getCurrentUserAttendance);
   }
   
   export default eventsSaga;

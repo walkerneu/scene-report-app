@@ -23,6 +23,7 @@ function UserProfile(){
     const user = useSelector(store => store.user)
     const currentUser = useSelector((store) => store.currentUser);
     const userEvents = useSelector(store => store.currentUserEvents);
+    const userAttendance = useSelector(store => store.currentUserAttendance);
     const now = new Date ();
     const goBack = () => {
         history.goBack();
@@ -34,6 +35,7 @@ function UserProfile(){
     const goToEvent = (eventId) => {
         history.push(`/event/${eventId}`)
     }
+    console.log("attendance:", userAttendance);
     return (
         <div>
     <Card
@@ -80,6 +82,8 @@ function UserProfile(){
         :
         ""
         }
+    { userEvents.length > 0 ?
+    <>
     <h3>{currentUser && currentUser.username} is hosting these upcoming events:</h3>
     <Card
       sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
@@ -98,6 +102,27 @@ function UserProfile(){
                     </Card>
                 )
             }
+        })}
+    </Card>
+    </>
+    :
+    ""
+    }
+    <h3>{currentUser && currentUser.username} is attending these upcoming events:</h3>
+    <Card
+      sx={{ maxWidth: 850, display: 'flex', flexFlow: "wrap", gap: 2, backgroundColor: "#2e2e2e", color: "antiquewhite"}}
+    >
+        {userAttendance.map(userEvent => {
+                return (
+                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <img
+                    src={userEvent.event_photo_url}
+                    alt={userEvent.title}
+                    width={300}
+                    />
+                    <h4>{userEvent.title}</h4>
+                    </Card>
+                )
         })}
     </Card>
     <h3>{currentUser && currentUser.username} hosted these past events:</h3>

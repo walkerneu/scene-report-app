@@ -46,8 +46,8 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Box sx={{ display: "flex", flexGrow: 2, backgroundColor: "#e6855f",  }}>
-      <AppBar position="static">
+      <Box sx={{ display: "flex", backgroundColor: "#e6855f", width: "100%"  }}>
+ 
         <Toolbar>
           <IconButton
             size="large"
@@ -115,7 +115,7 @@ function Nav() {
           </span>
           </Link>
         </Toolbar>
-      </AppBar>
+    
     </Box>
     </div>
   );

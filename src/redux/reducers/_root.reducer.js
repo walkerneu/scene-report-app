@@ -12,6 +12,7 @@ import currentHost from './currentHost.reducer'
 import currentUserEvents from './currentUserEvents.reducer';
 import eventComments from './eventComments.reducer';
 import currentQuery from './currentQuery.reducer';
+import currentUserAttendance from './currentUserAttendance.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   currentUserEvents,
   eventComments,
   currentQuery,
+  currentUserAttendance,
 
 });
 

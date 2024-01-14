@@ -42,6 +42,10 @@ function* getCurrentUser(action){
       type: "SAGA/GET_CURRENT_USER_EVENTS",
       payload: action.payload
     })
+    yield put ({
+      type: "SAGA/GET_CURRENT_USER_ATTENDANCE",
+      payload: action.payload
+    })
 } catch (error) {
     console.log('Shoot dang, error in Saga get user by id', error)
 }  

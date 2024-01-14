@@ -17,7 +17,7 @@ function SearchPage() {
   console.log(genres)
   const [searchQuery, setSearchQuery] = useState("");
   const [genreQuery, setGenreQuery] = useState("");
-  const [timeQuery, setTimeQuery] = useState('');
+  const [timeQuery, setTimeQuery] = useState(null);
   const submitSearch = () => {
     dispatch({
       type: "SAGA/GET_SEARCH",

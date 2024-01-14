@@ -130,12 +130,12 @@ function EventPage(){
         <div>
     <Card
       sx={{ 
-            width: 950, 
+            width: 850, 
             fontFamily: "helsinki", 
             backgroundColor: "#2e2e2e", 
             color: "antiquewhite", 
             outline: "#e6855f solid 10px", 
-            ml: 10 }}
+            ml: 5 }}
       className="description-box"
     >
       <img
@@ -220,11 +220,11 @@ function EventPage(){
       </CardActions>
     </Card>
     <Card sx={{
-            width: 950, 
+            width: 850, 
             backgroundColor: "#2e2e2e", 
             color: "antiquewhite", 
             outline: "#e6855f solid 10px", 
-            ml: 10,
+            ml: 5,
             display: "flex",
             flexDirection: "column",
             gap: 2,

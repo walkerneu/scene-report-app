@@ -16,7 +16,7 @@ function CommentItem ({comment}){
             backgroundColor: "#2e2e2e", 
             color: "antiquewhite", 
             outline: "#e6855f solid 5px",
-            ml: 10}}>
+            ml: 3}}>
         <CardContent>
         <CardActionArea>
           <Typography gutterBottom fontFamily="helsinki" variant="body" component="div" onClick={userClick}>

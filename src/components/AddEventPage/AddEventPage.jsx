@@ -21,7 +21,7 @@ function AddEventPage() {
   const [imgUpload, setImgUpload] = useState('');
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [eventBio, setEventBio] = useState('');
-  const [eventTime, setEventTime] = useState('');
+  const [eventTime, setEventTime] = useState(null);
   const [venue, setVenue] = useState('');
   const [cityState, setCityState] = useState('');
   const eventForm = new FormData ();
