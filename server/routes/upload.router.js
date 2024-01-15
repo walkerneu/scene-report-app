@@ -6,7 +6,7 @@ const pool = require("../modules/pool");
 const router = express.Router();
 const cloudinaryUpload = require("../modules/cloudinary.config");
 
-router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
+router.post("/", rejectUnauthenticated, cloudinaryUpload.single("image"), async (req, res) => {
   let connection;
   try {
     let imageUrl
@@ -51,6 +51,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
     const createdEventId = eventResult.rows[0].id;
     // Now handle the genre reference:
     for (let genreId of genreIdArray) {
+      if (genreId > 0){
       const eventGenreQuery = `
         INSERT INTO "events_genres" 
           ("event_id", "genre_id")
@@ -60,6 +61,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
       const eventGenreValues = [createdEventId, genreId];
 
       await connection.query(eventGenreQuery, eventGenreValues);
+      }
     }
     const attendanceQuery = `
     INSERT INTO "attendance"
@@ -79,7 +81,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
   }
 });
 
-router.put("/edit/:id", cloudinaryUpload.single("image"), async (req, res) => {
+router.put("/edit/:id", rejectUnauthenticated, cloudinaryUpload.single("image"), async (req, res) => {
   let connection;
   try {
     const genreIdArray = req.body.genre_id.split(",");

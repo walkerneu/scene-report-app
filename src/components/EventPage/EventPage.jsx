@@ -256,7 +256,8 @@ function EventPage(){
         {attendanceDisplay()}
       </CardContent>
       <CardActions>
-      {attendanceFunction()}
+      {user.id && (
+      attendanceFunction())}
         <Button
           variant="outlined" color="secondary"
           onClick={goBack}
@@ -289,6 +290,8 @@ function EventPage(){
             mt: 8}}>
         <div className="comment-submit">
         <h3 className='comment-header'>Comments:</h3>
+        {user.id && (
+        <>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>
@@ -304,6 +307,7 @@ function EventPage(){
         <Button variant="outlined" color="secondary" onClick={addComment}>
           SUBMIT COMMENT
         </Button>
+        </>)}
         </div>
         {comments && comments.map((comment) => (
             <CommentItem key={comment.id} comment={comment}/>

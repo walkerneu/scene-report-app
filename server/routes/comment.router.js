@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require("../modules/authentication-middleware");
 
 
 router.get('/all/:id', (req, res) => {
@@ -22,7 +25,7 @@ pool
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const commentQuery = `
     INSERT INTO "comments"
             ("comment", "user_id", "username", "event_id")

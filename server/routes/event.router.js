@@ -23,7 +23,7 @@ router.get("/id/:id", (req, res) => {
     });
 });
 
-router.get("/user/:id", (req, res) => {
+router.get("/user/:id", rejectUnauthenticated, (req, res) => {
   const query = `
       SELECT
       "events"."id" AS "id",
@@ -123,7 +123,7 @@ router.get("/attendees/:id", (req, res) => {
     })
 })
 
-router.post("/attend/:id", (req, res) => {
+router.post("/attend/:id", rejectUnauthenticated, (req, res) => {
   const eventId = req.params.id;
   const userId = req.user.id;
   const query = `
@@ -144,7 +144,7 @@ router.post("/attend/:id", (req, res) => {
     });
 });
 
-router.delete("/remove/:id", (req, res) => {
+router.delete("/remove/:id", rejectUnauthenticated, (req, res) => {
     const eventId = req.params.id;
     const userId = req.user.id;
     const query = `
@@ -166,7 +166,7 @@ router.delete("/remove/:id", (req, res) => {
       });
   });
 
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id", rejectUnauthenticated, (req, res) => {
   const eventId = req.params.id;
   const query = `
         DELETE FROM "events_genres"
@@ -183,13 +183,25 @@ router.delete("/delete/:id", (req, res) => {
         .query(query, [eventId])
         .then((result) => {
           const query = `
-                    DELETE FROM "events"
-                    WHERE "id" = $1;
+                    DELETE FROM "comments"
+                    WHERE "event_id" = $1;
                 `;
           pool
             .query(query, [eventId])
             .then((result) => {
-              res.sendStatus(200);
+              const query = `
+                DELETE FROM "events"
+                WHERE "id" = $1;
+            `;
+              pool
+                .query(query, [eventId])
+                .then((result) => {
+                  res.sendStatus(200);
+                })
+                .catch((err) => {
+                  console.log("Error in event router DELETE event", err);
+                  res.sendStatus(500);
+                });
             })
             .catch((err) => {
               console.log("Error in event router DELETE event", err);

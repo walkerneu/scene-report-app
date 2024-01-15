@@ -49,7 +49,7 @@ router.post('/register', (req, res, next) => {
     });
 });
 
-router.put('/update', cloudinaryUpload.single("image"), async (req, res) => {
+router.put('/update', rejectUnauthenticated, cloudinaryUpload.single("image"), async (req, res) => {
   let profilePictureUrl
   if (!req.file){
     profilePictureUrl = req.body.profile_picture

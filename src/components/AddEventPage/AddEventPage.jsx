@@ -8,6 +8,7 @@ import { Select } from "@mui/material";
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import { DateTimePicker } from '@mui/x-date-pickers';
+import Swal from 'sweetalert2'
 
 function AddEventPage() {
   const history = useHistory();
@@ -36,6 +37,14 @@ function AddEventPage() {
     history.goBack();
   };
   const addEvent = () => {
+    if (eventTime === null || eventName === ''){
+        Swal.fire({
+            icon: "error",
+            title: "Sorry!",
+            text: "You need to enter an event title and event time!",
+          });
+    }
+    else {
     if (imgUpload !== ''){
     eventForm.append("image", imgUpload);
     }
@@ -58,6 +67,7 @@ function AddEventPage() {
     setVenue('');
     setCityState('');
     setSelectedGenre([]);
+    }
   };
   console.log("selectedGenre:", selectedGenre)
   return (
@@ -86,6 +96,7 @@ function AddEventPage() {
         multiline
         maxRows={2}
         variant="filled"
+        required
         value={eventName}
         onChange={(event) => setEventName(event.target.value)}
       />

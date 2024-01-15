@@ -61,7 +61,6 @@ function UserProfile() {
           ml: 5,
           mt: 4,
         }}
-        className="description-box"
       >
         <img
           className="profile-pic"
