@@ -11,12 +11,19 @@ function* getSearch(action){
             type: 'SET_SEARCH_RESULTS',
             payload: response.data
         })
+        let timeQuery
+        if (action.payload.time === ''){
+            timeQuery = null;
+        }
+        else {
+            timeQuery = action.payload.time
+        }
         yield put ({
             type: "SET_CURRENT_QUERY",
             payload: {
                 query: action.payload.query,
                 genre: action.payload.genre,
-                time: action.payload.time
+                time: timeQuery
             }
         })
     } catch (error) {
@@ -36,7 +43,7 @@ function* getAllEvents(){
         })
         yield put ({
             type: "SET_CURRENT_QUERY",
-            payload: {query: '', genre: '', time: ''}
+            payload: {query: '', genre: '', time: null}
         })
     } catch (error) {
         console.log('Error in Saga GET all search:', error);

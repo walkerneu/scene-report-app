@@ -16,11 +16,8 @@ function FilterBar(){
   const currentQuery = useSelector(store => store.currentQuery)
   const genres = useSelector(store => store.genres);
   const [searchQuery, setSearchQuery] = useState(currentQuery.query);
-  const [genreQuery, setGenreQuery] = useState(currentQuery.genre);
+  const [genreQuery, setGenreQuery] = useState(Number(currentQuery.genre));
   const [timeQuery, setTimeQuery] = useState(currentQuery.time);
-  if (timeQuery === ''){
-    setTimeQuery(null);
-  }
   const submitSearch = () => {
     let time = ''
     if (timeQuery !== null){

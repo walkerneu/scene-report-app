@@ -33,7 +33,7 @@ function SearchResults() {
                     )
                 }
             })}
-            {currentQuery.time !== '' ?
+            {currentQuery.time !== null ?
                 <span> occuring on {currentQuery.time}</span>
             :
             ''}
@@ -57,7 +57,7 @@ function SearchResults() {
                     )
                 }
             })}
-            {currentQuery.time !== '' ?
+            {currentQuery.time !== null ?
                 <span> occuring on {currentQuery.time}</span>
             :
             ''}
