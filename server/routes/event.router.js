@@ -40,7 +40,7 @@ router.get("/user/:id", (req, res) => {
         WHERE "attendance"."user_id" = $1 AND "events"."event_time" > NOW();
     `;
   pool
-    .query(query, [req.params.id])
+    .query(query, [req.user.id])
     .then((result) => {
       res.send(result.rows);
       console.log("user Events from event router:", result.rows);

@@ -38,7 +38,7 @@ function FilterBar(){
             Filter by keyword:
           </Typography>
           <TextField
-            label="Search by Title"
+            label="Enter Text"
             type="search"
             onChange={(event) => setSearchQuery(event.target.value)}
             value={searchQuery}
@@ -66,7 +66,7 @@ function FilterBar(){
         Filter by Date:
       </Typography>
       <DatePicker
-        label="Event Time"
+        label="Click calendar to select"
         value={timeQuery}
         onChange={setTimeQuery}
       />
