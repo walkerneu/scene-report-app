@@ -62,7 +62,6 @@ function SearchResults() {
             :
             ''}
         </h2>
-        <FilterBar />
         </>
     )
     }
@@ -70,6 +69,7 @@ function SearchResults() {
   return (
     <div className="container">
       {queryDisplay()}
+      <FilterBar />
       { searchResults.length === 0 ?
       ""
       :
