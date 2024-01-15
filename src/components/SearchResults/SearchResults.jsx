@@ -1,6 +1,7 @@
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import EventItem from '../EventItem/EventItem';
+import FilterBar from '../FilterBar/FilterBar';
 
 function SearchResults() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function SearchResults() {
     return (
         <>
         <h2>
-            Showing results 
+            Showing all events 
             {currentQuery.query !== '' ?
                 <span> matching "{currentQuery.query}"</span>
             :
@@ -61,6 +62,7 @@ function SearchResults() {
             :
             ''}
         </h2>
+        <FilterBar />
         </>
     )
     }

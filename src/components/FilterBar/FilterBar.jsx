@@ -7,16 +7,20 @@ import { useHistory } from "react-router-dom";
 import { DatePicker } from '@mui/x-date-pickers';
 import Card from '@mui/material/Card';
 
-function SearchPage() {
+function FilterBar(){
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
     dispatch({ type: "SAGA/GET_GENRES" });
   }, []);
+  const currentQuery = useSelector(store => store.currentQuery)
   const genres = useSelector(store => store.genres);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [genreQuery, setGenreQuery] = useState("");
-  const [timeQuery, setTimeQuery] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(currentQuery.query);
+  const [genreQuery, setGenreQuery] = useState(currentQuery.genre);
+  const [timeQuery, setTimeQuery] = useState(currentQuery.time);
+  if (timeQuery === ''){
+    setTimeQuery(null);
+  }
   const submitSearch = () => {
     let time = ''
     if (timeQuery !== null){
@@ -29,35 +33,12 @@ function SearchPage() {
         genre: genreQuery,
         time: time}
     });
-    history.push("/searchResults");
   };
-  const searchAll = () => {
-    dispatch({
-      type: "SAGA/GET_ALL_EVENTS"
-    });
-    history.push("/searchResults");
-  };
-  return (
-    <>
-      <Card 
-        sx={{ 
-            maxWidth: 800,
-            backgroundColor: "#2e2e2e", 
-            color: "antiquewhite", 
-            outline: "#e6855f solid 10px",
-            ml: 10,
-            display: 'flex', 
-            flexDirection: 'column', 
-            alignItems: 'center'
-            }}>
-          <Typography gutterBottom variant="h4" component="div" mt={5} fontFamily={"helsinki"}>
-            Search for Events!
-          </Typography>
-          <Typography gutterBottom variant="h7" component="div" fontFamily={"helsinki"}>
-            Use any or all criteria, or click "Show All Events" to view all upcoming events
-          </Typography>
-          <Typography gutterBottom variant="overline" display="block" mt={3}>
-            Search by keyword:
+    return (
+        <div className="filter-bar">
+            <div className="filter-input">
+            <Typography gutterBottom variant="overline" display="block" mt={3}>
+            Filter by keyword:
           </Typography>
           <TextField
             label="Search by Title"
@@ -65,8 +46,10 @@ function SearchPage() {
             onChange={(event) => setSearchQuery(event.target.value)}
             value={searchQuery}
           />
+          </div>
+          <div className="filter-input">
           <Typography gutterBottom variant="overline" display="block">
-            Search By Genre:
+            Filter By Genre:
           </Typography>
           <Select
             helperText="Please select a genre"
@@ -80,39 +63,29 @@ function SearchPage() {
               </MenuItem>
             ))}
           </Select>
-          <p>
+          </div>
+          <div className="filter-input">
       <Typography gutterBottom variant="overline" display="block">
-        Search by Date:
+        Filter by Date:
       </Typography>
       <DatePicker
         label="Event Time"
         value={timeQuery}
         onChange={setTimeQuery}
       />
-      </p>
-          <p>
+      </div>
+      <div className="filter-button">
           <Button
             variant="contained"
             color="secondary"
             onClick={submitSearch}
             sx={{mt: 3}}
           >
-            SEARCH
+            FILTER
           </Button>
-          </p>
-          <p>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={searchAll}
-            sx={{mt: 6}}
-          >
-            Show All Events
-          </Button>
-        </p>
-      </Card>
-    </>
-  );
+          </div>
+        </div>
+    )
 }
 
-export default SearchPage;
+export default FilterBar;
