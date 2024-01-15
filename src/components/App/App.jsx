@@ -25,7 +25,6 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddEventPage from '../AddEventPage/AddEventPage';
-import CreatedEventPage from '../CreatedEventPage/CreatedEventPage';
 import EventPage from '../EventPage/EventPage';
 import SearchPage from '../SearchPage/SearchPage';
 import SearchResults from '../SearchResults/SearchResults';
@@ -103,13 +102,6 @@ function App() {
             path="/event/edit/:id"
           >
             <EditEvent />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            exact
-            path="/event/created"
-          >
-            <CreatedEventPage/>
           </ProtectedRoute>
           <Route
             exact

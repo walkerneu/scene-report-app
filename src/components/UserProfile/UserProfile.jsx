@@ -64,9 +64,10 @@ function UserProfile() {
         className="description-box"
       >
         <img
+          className="profile-pic"
           src={currentUser && currentUser.profile_picture}
           alt={currentUser && currentUser.username}
-          width={300}
+         
         />
 
         <CardContent>

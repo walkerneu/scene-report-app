@@ -183,6 +183,12 @@ input {
   padding: 4px;
 }
 
+.profile-pic {
+  padding: 15px;
+  max-width: 300px;
+  max-height: 500px;
+}
+
 .form-control {
   display: flex;
   flex-direction: column;
