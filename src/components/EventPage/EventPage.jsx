@@ -94,6 +94,7 @@ function EventPage(){
                 event: event.id,
                 user: user.id}
         })
+        setAttending(false);
     }
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
