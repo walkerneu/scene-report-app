@@ -35,8 +35,10 @@ function AddEventPage() {
     setSelectedGenre([]);
     history.goBack();
   };
-  const addEvent = async () => {
+  const addEvent = () => {
+    if (imgUpload !== ''){
     eventForm.append("image", imgUpload);
+    }
     eventForm.append("eventName", eventName);
     eventForm.append("description", eventBio);
     eventForm.append("event_time", eventTime);

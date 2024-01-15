@@ -9,9 +9,14 @@ const cloudinaryUpload = require("../modules/cloudinary.config");
 router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
   let connection;
   try {
+    let imageUrl
+    if (!req.file){
+        imageUrl = 'https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg';
+    } else {
+        imageUrl = req.file.path;
+    }
     const eventName = req.body.eventName;
     const description = req.body.description;
-    const imageUrl = req.file.path;
     const eventTime = req.body.event_time;
     const venue = req.body.venue;
     const location = req.body.location;
@@ -67,7 +72,7 @@ router.post("/", cloudinaryUpload.single("image"), async (req, res) => {
     connection.release();
     res.send({ id: createdEventId });
   } catch (error) {
-    console.log("Error in upload router POST:", err);
+    console.log("Error in upload router POST:", error);
     connection.query("ROLLBACK;");
     connection.release();
     res.sendStatus(500);
@@ -133,7 +138,7 @@ router.put("/edit/:id", cloudinaryUpload.single("image"), async (req, res) => {
     connection.release();
     res.sendStatus(201);
   } catch (error) {
-    console.log("Error in upload router POST:", err);
+    console.log("Error in upload router POST:", error);
     connection.query("ROLLBACK;");
     connection.release();
     res.sendStatus(500);
