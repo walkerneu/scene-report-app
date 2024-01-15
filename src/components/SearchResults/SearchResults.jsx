@@ -31,6 +31,10 @@ function SearchResults() {
                     )
                 }
             })}
+            {currentQuery.time !== '' ?
+                <span> occuring on {currentQuery.time}</span>
+            :
+            ''}
         </h2>
         </>
     )

@@ -15,7 +15,8 @@ function* getSearch(action){
             type: "SET_CURRENT_QUERY",
             payload: {
                 query: action.payload.query,
-                genre: action.payload.genre
+                genre: action.payload.genre,
+                time: action.payload.time
             }
         })
     } catch (error) {
@@ -35,7 +36,7 @@ function* getAllEvents(){
         })
         yield put ({
             type: "SET_CURRENT_QUERY",
-            payload: {query: '', genre: ''}
+            payload: {query: '', genre: '', time: ''}
         })
     } catch (error) {
         console.log('Error in Saga GET all search:', error);

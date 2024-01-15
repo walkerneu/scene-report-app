@@ -19,12 +19,16 @@ function SearchPage() {
   const [genreQuery, setGenreQuery] = useState("");
   const [timeQuery, setTimeQuery] = useState(null);
   const submitSearch = () => {
+    let time = ''
+    if (timeQuery !== null){
+        time = new Date(timeQuery).toLocaleDateString()
+    } 
     dispatch({
       type: "SAGA/GET_SEARCH",
       payload: {
         query: searchQuery,
         genre: genreQuery,
-        time: new Date(timeQuery).toLocaleDateString()}
+        time: time}
     });
     history.push("/searchResults");
   };

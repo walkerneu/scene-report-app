@@ -1,4 +1,4 @@
-const currentQuery = (state = {query: '', genre: ''}, action) => {
+const currentQuery = (state = {query: '', genre: '', time: ''}, action) => {
     switch (action.type) {
       case 'SET_CURRENT_QUERY':
         return action.payload;

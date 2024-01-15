@@ -79,7 +79,8 @@ function EventPage(){
             type: 'SAGA/GET_SEARCH',
             payload: {
                 query: '',
-                genre: genreId
+                genre: genreId,
+                time: ''
             }
         })
         history.push('/searchResults')
