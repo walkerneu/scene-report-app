@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { Button } from '@mui/material';
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -34,31 +36,39 @@ function LoginForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+      <Typography gutterBottom variant="overline" display="block">
           Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+        </Typography>
+        <TextField
+          sx={{mb: "15px"}}
+          label="Username"
+          placeholder="Username"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="password">
+      <Typography gutterBottom variant="overline" display="block">
           Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+        </Typography>
+        <TextField
+          sx={{mb: "15px"}}
+          label="Password"
+          placeholder="Password"
+          type="password"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
-        <Button 
+        <Button
+          sx={{mb: "15px"}} 
           variant="contained" 
           color="success"
           type="submit"

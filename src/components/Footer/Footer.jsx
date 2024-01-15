@@ -8,7 +8,7 @@ import './Footer.css';
 
 function Footer() {
   return <footer>
-          <p>&copy; Prime Digital Academy</p>
+          <p>&copy; Walker Neudorff</p>
           <p>Powered by Slurp™ Industries!</p>
         </footer>;
 }

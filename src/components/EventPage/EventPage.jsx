@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActions } from "@mui/material";
+import { Button, CardActions, CardActionArea } from "@mui/material";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import CommentItem from '../CommentItem/CommentItem';
 import TextField from "@mui/material/TextField";
@@ -172,9 +172,11 @@ function EventPage(){
           <p>There are {daysUntil} days until this event!</p>
         </Typography>
         <p>
-        <Typography variant="body" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
+        <CardActionArea>
+        <Typography variant="h6" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
         <span className='info-text'>Hosted by:</span> {host.username}
         </Typography>
+        </CardActionArea>
         </p>
         <Typography className='info-text' variant="h6" fontFamily="helsinki">
           Description:
@@ -184,21 +186,22 @@ function EventPage(){
           {event.description}
           </p>
         </Typography>
-        <Typography variant="h6" component="div" fontFamily="helsinki">
+        <Typography variant="h6" component="div" fontFamily="helsinki" className='genrebox'>
         <span className='info-text'>Genres:</span>
           {genres.map((genre) => (
-            <span 
-                key={genre.id}
+            <CardActionArea sx={{pl: '12px', pr: '12px'}} key={genre.id} className='genre-item'>
+            <span
                 onClick={() => goToGenre(genre.id)}
-                className='pointer'> 
-                    {genre.genre_name} /
-            </span>
+                >{genre.genre_name}</span>
+            </CardActionArea>
           ))}
-        </Typography>
+        </Typography>     
         <Typography variant="body2" color="text.secondary">
           
         </Typography>
+        <CardActionArea>
         {attendanceDisplay()}
+        </CardActionArea>
       </CardContent>
       <CardActions>
       { attending ?
@@ -207,26 +210,24 @@ function EventPage(){
         </Typography>
         :
         <Button
-          size="small"
-          color="primary"
+          variant="outlined" color="secondary"
           onClick={attend}
         >
           Would you like to attend this event?
         </Button>
         }
         <Button
-          size="small"
-          color="primary"
+          variant="outlined" color="secondary"
           onClick={goBack}
         >
           BACK
         </Button>
         { user.id === event.creator_id ?
         <>
-        <Button size="small" color="primary" onClick={goToEdit}>
+        <Button variant="outlined" color="secondary" onClick={goToEdit}>
           EDIT
         </Button>
-        <Button size="small" color="primary" onClick={deleteEvent}>
+        <Button variant="outlined" color="secondary" onClick={deleteEvent}>
           DELETE
         </Button>
         </>
@@ -258,7 +259,7 @@ function EventPage(){
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
         />
-        <Button size="small" color="primary" onClick={addComment}>
+        <Button variant="outlined" color="secondary" onClick={addComment}>
           ADD COMMENT
         </Button>
         {comments && comments.map((comment) => (

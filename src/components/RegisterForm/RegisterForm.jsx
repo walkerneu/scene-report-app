@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -29,31 +31,39 @@ function RegisterForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
+      <Typography gutterBottom variant="overline" display="block">
           Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
+        </Typography>
+        <TextField
+          sx={{mb: "15px"}}
+          label="Username"
+          placeholder="Username"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
       </div>
       <div>
-        <label htmlFor="password">
+      <Typography gutterBottom variant="overline" display="block">
           Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
+        </Typography>
+        <TextField
+          sx={{mb: "15px"}}
+          label="Password"
+          placeholder="Password"
+          type="password"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </div>
       <div>
-      <Button 
+        <Button
+          sx={{mb: "15px"}} 
           variant="contained" 
           color="success"
           type="submit"

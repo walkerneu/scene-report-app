@@ -14,21 +14,14 @@ function LandingPage() {
 
   return (
     <div className="container">
-      <h2>Welcome to Scene Report!</h2>
-
+      <h1>Welcome to Scene Report</h1>
+      <h2>A journey of discovery awaits you!</h2>
       <div className="grid">
-        <div className="grid-col grid-col_8">
-        </div>
-        <div className="grid-col grid-col_4">
           <RegisterForm />
-
-          <center>
             <h4>Already a Member?</h4>
             <Button variant="contained" color="success" onClick={onLogin}>
               Login
             </Button>
-          </center>
-        </div>
       </div>
     </div>
   );

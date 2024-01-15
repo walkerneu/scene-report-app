@@ -38,23 +38,23 @@ function UserProfile(){
     console.log("attendance:", userAttendance);
     return (
         <div>
-        <Button
-          size="small"
-          color="primary"
-          onClick={goBack}
-          data-testid="toList"
-        >
-          BACK
-        </Button>
         { currentUser && currentUser.id === user.id ?
         <>
-        <Button size="small" color="primary" onClick={goToEdit}>
+        <Button variant="outlined" color="secondary" onClick={goToEdit}>
           Would you like to edit your profile?
         </Button>
         </>
         :
         ""
         }
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={goBack}
+          data-testid="toList"
+        >
+          BACK
+        </Button>
     <Card
       sx={{ maxWidth: 850, display: 'flex', backgroundColor: "#2e2e2e", color: "antiquewhite"}}
       className="description-box"
@@ -78,7 +78,7 @@ function UserProfile(){
         </Typography>
         </p>
         <Typography gutterBottom variant="h6" component="div">
-          <a href={currentUser && currentUser.social_media_link}>Social Media Link</a>
+          <a className='test' href={currentUser && currentUser.social_media_link}>Social Media Link</a>
         </Typography>
       </CardContent>
     </Card>
@@ -92,7 +92,7 @@ function UserProfile(){
             const eventTime = new Date (userEvent.event_time);
             if (eventTime.getTime() > now.getTime()){
                 return (
-                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <Card key={userEvent.id} sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
                     <img
                     src={userEvent.event_photo_url}
                     alt={userEvent.title}
@@ -116,7 +116,7 @@ function UserProfile(){
     >
         {userAttendance.map(userEvent => {
                 return (
-                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <Card key={userEvent.id} sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
                     <img
                     src={userEvent.event_photo_url}
                     alt={userEvent.title}
@@ -141,7 +141,7 @@ function UserProfile(){
             const eventTime = new Date (userEvent.event_time);
             if (eventTime.getTime() < now.getTime()){
                 return (
-                    <Card sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
+                    <Card key={userEvent.id} sx={{maxWidth: 100, backgroundColor: "#2e2e2e", color: "antiquewhite"}} onClick={() => goToEvent(userEvent.id)} className="pointer">
                     <img
                     src={userEvent.event_photo_url}
                     alt={userEvent.title}

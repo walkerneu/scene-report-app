@@ -27,7 +27,7 @@ function UserPage() {
       return (
         <>
         <h3>You don't have any events on your calendar!</h3>
-        <h3 onClick={goToSearch} className='pointer'>Click here to discover events!</h3>
+        <h3 onClick={goToSearch} className='pointer test'>Click here to discover events!</h3>
         </>
       )
     }
