@@ -36,7 +36,6 @@ function LoginForm() {
           backgroundColor: "#2e2e2e", 
           color: "antiquewhite", 
           outline: "#e6855f solid 10px",
-          ml: 10,
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center'

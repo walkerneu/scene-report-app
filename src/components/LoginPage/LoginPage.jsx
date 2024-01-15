@@ -11,7 +11,7 @@ function LoginPage() {
       <center>
         <LoginForm />
         <Button
-          sx={{ mt: 5, ml: 8 }}
+          sx={{ mt: 5}}
           type="button"
           variant="outlined"
           color="secondary"
