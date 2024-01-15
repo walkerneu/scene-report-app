@@ -16,6 +16,31 @@ function SearchResults() {
   const msPerDay = 24 * 60 * 60 * 1000;
   console.log("Current Query is:", currentQuery)
   const queryDisplay = () => {
+    if (searchResults.length === 0){
+        return (
+            <>
+        <h2>
+            No results 
+            {currentQuery.query !== '' ?
+                <span> matching "{currentQuery.query}"</span>
+            :
+            ''}
+            {genres.map((genre) => {
+                if (genre.id === currentQuery.genre){
+                    return (
+                        <span key={genre.id}> tagged as "{genre.genre_name}"</span>
+                    )
+                }
+            })}
+            {currentQuery.time !== '' ?
+                <span> occuring on {currentQuery.time}</span>
+            :
+            ''}
+        </h2>
+        </>
+        )
+    }
+    else {
     return (
         <>
         <h2>
@@ -38,10 +63,15 @@ function SearchResults() {
         </h2>
         </>
     )
+    }
   }
   return (
     <div className="container">
       {queryDisplay()}
+      { searchResults.length === 0 ?
+      ""
+      :
+      <>
       <h3>Events This Week:</h3>
       <section className="events">
       {searchResults.map(userEvent => {
@@ -72,6 +102,8 @@ function SearchResults() {
       )}
   })}
       </section>
+      </>
+    }
     </div>
   );
 }

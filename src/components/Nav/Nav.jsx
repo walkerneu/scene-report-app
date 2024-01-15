@@ -31,7 +31,10 @@ function Nav() {
     } else if (num === 3) {
       history.push("/search");
     } else if (num === 4) {
-      history.push("/info");
+      dispatch({
+        type: "SAGA/GET_ALL_EVENTS"
+      });
+      history.push("/searchResults");
     } else if (num === 5) {
       history.push("/about");
     } else if (num === 6) {
@@ -74,6 +77,7 @@ function Nav() {
           >
             <MenuItem onClick={() => handleClose(1)}>Home</MenuItem>
             <MenuItem onClick={() => handleClose(3)}>Search</MenuItem>
+            <MenuItem onClick={() => handleClose(4)}>Browse Events</MenuItem>
             <MenuItem onClick={() => handleClose(5)}>About</MenuItem>
             {/* If no user is logged in, show these links */}
              {!user.id && (
@@ -87,32 +91,29 @@ function Nav() {
               <div>
               <MenuItem onClick={() => handleClose(2)}>Add an Event</MenuItem>
               <MenuItem onClick={() => handleClose(7)}>My Profile</MenuItem>
-              <MenuItem onClick={() => handleClose(4)}>Info</MenuItem>
               <MenuItem onClick={() => handleClose(8)}>Logout</MenuItem>
               </div>
             )}
           </Menu>
           <Link to="/home">
+          <div className='nav-box'>
           <Typography 
             variant="h4" 
             fontFamily="blockbuster"
-            fontSize={20}
-            color={'black'}
-            component="div" 
-            sx={{ flexGrow: 1, mr: 10, ml: 7, mb: 5, mt: 3}}>
+            fontSize={50}
+            color={'black'} 
+            sx={{ ml: 5, mr: 5, mt: 4, mb: 4 }}>
             Scene Report
           </Typography>
-          <span>
           <Typography 
             variant="h6" 
             fontFamily="blockbuster"
             color={'black'}
-            fontSize={10}
-            component="div" 
-            sx={{ mr: 10, ml: 7, mb: 2}}>
+            fontSize={30}
+            sx={{ ml: 5, mr: 5 }}>
             Events from Your Community
           </Typography>
-          </span>
+          </div>
           </Link>
         </Toolbar>
     

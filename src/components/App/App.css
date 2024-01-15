@@ -4,11 +4,17 @@
 }
 @font-face {
   font-family: "blockbuster";
-  src: url("../../../public/PunkInside.ttf");
+  src: url("../../../public/Dafter\ Harder\ Better\ Stronger\ ļ\ by\ Duncan\ Wick.ttf");
 }
 @font-face {
   font-family: "helsinki";
   src: url("../../../public/Louis\ George\ Cafe.ttf");
+}
+
+.nav-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .pointer {

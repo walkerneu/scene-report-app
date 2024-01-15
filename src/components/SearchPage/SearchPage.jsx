@@ -42,15 +42,6 @@ function SearchPage() {
   return (
     <>
       <div className="search-container">
-        <p>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={searchAll}
-          >
-            View All Events
-          </Button>
-        </p>
         <div className="search-box">
           <Typography gutterBottom variant="overline" display="block" mt={3}>
             Search for Events by keyword:
@@ -97,6 +88,15 @@ function SearchPage() {
             SEARCH
           </Button>
           </p>
+          <p>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={searchAll}
+          >
+            Show All Events
+          </Button>
+        </p>
         </div>
       </div>
     </>
