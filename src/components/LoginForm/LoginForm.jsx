@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import { Button } from '@mui/material';
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import Card from '@mui/material/Card';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -28,6 +29,18 @@ function LoginForm() {
   }; // end login
 
   return (
+    <>
+    <Card 
+      sx={{ 
+          width: 500,
+          backgroundColor: "#2e2e2e", 
+          color: "antiquewhite", 
+          outline: "#e6855f solid 10px",
+          ml: 10,
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center'
+          }}>
     <form className="form-control" onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
@@ -57,10 +70,8 @@ function LoginForm() {
         <TextField
           sx={{mb: "15px"}}
           label="Password"
-          placeholder="Password"
           type="password"
-          multiline
-          maxRows={4}
+          autoComplete="current-password"
           variant="filled"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
@@ -78,6 +89,8 @@ function LoginForm() {
       </Button>
       </div>
     </form>
+    </Card>
+    </>
   );
 }
 

@@ -42,7 +42,6 @@ function EventPage(){
     let eventIdArray = [];
     userEvents.map((userEvent) => {
         eventIdArray.push(userEvent.id);
-        console.log("user event id", userEvent.id)
     })
     const [attending, setAttending] = useState(eventIdArray.includes(Number(id)))
     const [commentText, setCommentText] = useState('');
