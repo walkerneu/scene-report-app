@@ -45,6 +45,24 @@ function* attendEvent(action){
         console.log('Heckin heck, error in Saga attend event', error)
     }
 }
+function* removeEvent(action){
+    try {
+        const response = yield axios({
+            method: "DELETE",
+            url: `/api/event/remove/${action.payload.event}`
+        })
+        yield put ({
+            type: "SAGA/GET_CURRENT_EVENT",
+            payload: action.payload.event
+        })
+        yield put ({
+            type: "SAGA/GET_USER_EVENTS",
+            payload: action.payload.user
+        })
+    } catch (error) {
+        console.log('Farts on the docket, error in Saga remove attend event', error)
+    }
+}
 function* deleteEvent(action){
     try {
         const response = yield axios({
@@ -140,6 +158,7 @@ function* eventsSaga() {
     yield takeLatest('SAGA/GET_ATTENDEES', getAttendees);
     yield takeLatest('SAGA/GET_CURRENT_USER_EVENTS', getCurrentUserEvents);
     yield takeLatest('SAGA/GET_CURRENT_USER_ATTENDANCE', getCurrentUserAttendance);
+    yield takeLatest('SAGA/REMOVE_EVENT', removeEvent)
   }
   
   export default eventsSaga;

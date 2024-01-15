@@ -144,6 +144,28 @@ router.post("/attend/:id", (req, res) => {
     });
 });
 
+router.delete("/remove/:id", (req, res) => {
+    const eventId = req.params.id;
+    const userId = req.user.id;
+    const query = `
+          DELETE FROM "attendance"
+            WHERE 
+            "user_id" = $1
+            AND
+            "event_id" = $2;
+      `;
+    const sqlValues = [userId, eventId];
+    pool
+      .query(query, sqlValues)
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("Error in event router POST attendance", err);
+        res.sendStatus(500);
+      });
+  });
+
 router.delete("/delete/:id", (req, res) => {
   const eventId = req.params.id;
   const query = `
@@ -167,7 +189,7 @@ router.delete("/delete/:id", (req, res) => {
           pool
             .query(query, [eventId])
             .then((result) => {
-              res.sendStatus(201);
+              res.sendStatus(200);
             })
             .catch((err) => {
               console.log("Error in event router DELETE event", err);

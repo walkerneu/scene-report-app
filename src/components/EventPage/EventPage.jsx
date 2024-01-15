@@ -20,6 +20,7 @@ function EventPage(){
           type: "SAGA/GET_CURRENT_EVENT",
           payload: id
         })
+        attendanceFunction()
       }, [id])
     const event = useSelector(store => store.currentEvent);
     useEffect(() => {
@@ -38,14 +39,42 @@ function EventPage(){
     const eventTime = new Date (event.event_time);
     const msPerDay = 24 * 60 * 60 * 1000; 
     const daysUntil = Math.round((eventTime.getTime() - now.getTime()) / msPerDay)
-    console.log("Here's the difference:", daysUntil)
-    console.log("here's the host:", host)
     let eventIdArray = [];
-      for (let userEvent of userEvents) {
+    userEvents.map((userEvent) => {
         eventIdArray.push(userEvent.id);
-      }
+        console.log("user event id", userEvent.id)
+    })
     const [attending, setAttending] = useState(eventIdArray.includes(Number(id)))
     const [commentText, setCommentText] = useState('');
+    console.log("attending", attending)
+    const attendanceFunction = () => {
+      if(attending) {
+        return (
+        <>
+        <Typography 
+            sx={{ml: "8px"}}
+            variant="body" 
+            fontFamily="helsinki">
+            You are attending this event!
+        </Typography>
+        <Button
+        variant="outlined" color="secondary"
+        onClick={removeEvent}
+      >
+        Remove from My Calendar
+      </Button>
+      </>
+        )}
+      else {
+        return (
+        <Button
+          variant="outlined" color="secondary"
+          onClick={attend}
+        >
+          Add to My Calendar
+        </Button>
+        )}
+    }
     const goBack = () => {
         history.goBack();
       };
@@ -57,6 +86,14 @@ function EventPage(){
                 user: user.id}
         })
         setAttending(true);
+    }
+    const removeEvent = () => {
+        dispatch({
+            type: "SAGA/REMOVE_EVENT",
+            payload: {
+                event: event.id,
+                user: user.id}
+        })
     }
     const goToEdit = () => {
         history.push(`/event/edit/${id}`);
@@ -201,21 +238,7 @@ function EventPage(){
         {attendanceDisplay()}
       </CardContent>
       <CardActions>
-      { attending ?
-        <Typography 
-            sx={{ml: "8px"}}
-            variant="body" 
-            fontFamily="helsinki">
-            You are attending this event!
-        </Typography>
-        :
-        <Button
-          variant="outlined" color="secondary"
-          onClick={attend}
-        >
-          Add to My Calendar
-        </Button>
-        }
+      {attendanceFunction()}
         <Button
           variant="outlined" color="secondary"
           onClick={goBack}
