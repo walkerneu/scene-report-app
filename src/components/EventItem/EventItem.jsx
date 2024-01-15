@@ -26,7 +26,6 @@ function EventItem ({ userEvent }){
         <div className="event-item">
         <img
           className="item-img"
-          width={150}
           src={userEvent.event_photo_url}
           alt={userEvent.title}
         />
