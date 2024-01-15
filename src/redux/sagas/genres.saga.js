@@ -28,6 +28,10 @@ function* getGenresByEventId(action){
     }
 }
 
+function* addGenreTags(action){
+    
+}
+
 function* genresSaga() {
     yield takeLatest('SAGA/GET_GENRES', getAllGenres);
     yield takeLatest('SAGA/GET_CURRENT_GENRES', getGenresByEventId)

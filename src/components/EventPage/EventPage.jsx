@@ -9,6 +9,7 @@ import { Button, CardActions, CardActionArea } from "@mui/material";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import CommentItem from '../CommentItem/CommentItem';
 import TextField from "@mui/material/TextField";
+import Swal from 'sweetalert2'
 
 function EventPage(){
 
@@ -105,11 +106,28 @@ function EventPage(){
         history.push(`/user/${host.id}`);
       };
     const deleteEvent = () => {
-        dispatch({
-            type: 'SAGA/DELETE_EVENT',
-            payload: event.id
-        })
-        history.push('/');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your event has been deleted.",
+                icon: "success"
+              });
+              dispatch({
+                type: 'SAGA/DELETE_EVENT',
+                payload: event.id
+            })
+            history.push('/');
+            }
+          });
     }
     const goToGenre = (genreId) => {
         dispatch({
