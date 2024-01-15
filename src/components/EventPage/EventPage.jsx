@@ -99,38 +99,40 @@ function EventPage(){
         if (attendees.length > 1){
             return (
                 <>
-                <Typography 
-                    variant="body2"
-                    fontFamily="helsinki"
-                    className="pointer"
-                    onClick={goToAttendance}>
+                <Typography
+                    sx={{mt: 3}}
+                    variant="h6"
+                    fontFamily="helsinki">
                     There are {attendees.length} people attending
                 </Typography>
-                <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
+                <CardActionArea sx={{mt: 1}}>
+                <Typography variant="h6" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
                 </Typography>
+                </CardActionArea>
                 </>
             )
         }
         else if (attendees.length === 1){
             return (
                 <>
-                <Typography 
-                    variant="body2"
-                    fontFamily="helsinki"
-                    className="pointer"
-                    onClick={goToAttendance}>
+                <Typography
+                    sx={{mt: 3}}
+                    variant="h6"
+                    fontFamily="helsinki">
                     There is 1 person attending
                 </Typography>
-                <Typography variant="body2" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
+                <CardActionArea sx={{mt: 1}}>
+                <Typography variant="h6" className="pointer" fontFamily="helsinki" onClick={goToAttendance}>
                 Click here to see the list!
                 </Typography>
+                </CardActionArea>
                 </>
             )
         }
         else {
             return (
-                <Typography variant="body2" fontFamily="helsinki">
+                <Typography variant="h6" fontFamily="helsinki">
                     There is no one attending
                 </Typography>
             )
@@ -158,54 +160,52 @@ function EventPage(){
         <Typography gutterBottom variant="h3" component="div" fontFamily="helsinki">
           {event.title}
         </Typography>
-        <Typography className='info-text' variant="h6" fontFamily="helsinki">
+        <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Location:
         </Typography>
-        <Typography variant="h6" fontFamily="helsinki">
+        <Typography variant="h5" fontFamily="helsinki">
         {event.venue}, {event.location}
         </Typography>
-        <Typography className='info-text' variant="h6" fontFamily="helsinki">
+        <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Time:
         </Typography>
-        <Typography variant="h6" component="div" fontFamily="helsinki">
+        <Typography variant="h5" component="div" fontFamily="helsinki">
           {new Date(event.event_time).toLocaleString('en-us')}
           <p>There are {daysUntil} days until this event!</p>
         </Typography>
         <p>
         <CardActionArea>
-        <Typography variant="h6" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
+        <Typography variant="h5" fontFamily="helsinki" className="pointer" onClick={goToCreator}>
         <span className='info-text'>Hosted by:</span> {host.username}
         </Typography>
         </CardActionArea>
         </p>
-        <Typography className='info-text' variant="h6" fontFamily="helsinki">
+        <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Description:
         </Typography>
-        <Typography variant="body" fontFamily="helsinki">
+        <Typography variant="h6" fontFamily="helsinki">
             <p>
           {event.description}
           </p>
         </Typography>
-        <Typography variant="h6" component="div" fontFamily="helsinki" className='genrebox'>
+        <Typography sx={{mb: '5px'}}variant="h5" component="div" fontFamily="helsinki" className='genrebox' >
         <span className='info-text'>Genres:</span>
           {genres.map((genre) => (
-            <CardActionArea sx={{pl: '12px', pr: '12px'}} key={genre.id} className='genre-item'>
+            <CardActionArea sx={{pl: '12px', pr: '12px', mt: '5px'}} key={genre.id} className='genre-item'>
             <span
                 onClick={() => goToGenre(genre.id)}
                 >{genre.genre_name}</span>
             </CardActionArea>
           ))}
         </Typography>     
-        <Typography variant="body2" color="text.secondary">
-          
-        </Typography>
-        <CardActionArea>
         {attendanceDisplay()}
-        </CardActionArea>
       </CardContent>
       <CardActions>
       { attending ?
-        <Typography variant="body2" fontFamily="helsinki">
+        <Typography 
+            sx={{ml: "8px"}}
+            variant="body" 
+            fontFamily="helsinki">
             You are attending this event!
         </Typography>
         :
@@ -213,7 +213,7 @@ function EventPage(){
           variant="outlined" color="secondary"
           onClick={attend}
         >
-          Would you like to attend this event?
+          Add to My Calendar
         </Button>
         }
         <Button
@@ -246,7 +246,8 @@ function EventPage(){
             flexDirection: "column",
             gap: 2,
             mt: 8}}>
-        <h3>Comments:</h3>
+        <div className="comment-submit">
+        <h3 className='comment-header'>Comments:</h3>
         <Typography gutterBottom variant="overline" display="block">
         Add a Comment:
         </Typography>
@@ -260,8 +261,9 @@ function EventPage(){
             onChange={(event) => setCommentText(event.target.value)}
         />
         <Button variant="outlined" color="secondary" onClick={addComment}>
-          ADD COMMENT
+          SUBMIT COMMENT
         </Button>
+        </div>
         {comments && comments.map((comment) => (
             <CommentItem key={comment.id} comment={comment}/>
         ))}

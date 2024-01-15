@@ -179,6 +179,7 @@ input {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
+  align-items: center;
 }
 
 .genre-item {
@@ -190,7 +191,17 @@ input {
 .search-container {
   margin-left: 50px;
 }
-
+.comment-submit {
+  display: flex;
+  flex-direction: column;
+  gap: 2;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+}
+.comment-header {
+  align-self: center;
+}
 .test {
   color:#e6855f
 }
