@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: "blockbuster";
-  src: url("../../../public/Dafter\ Harder\ Better\ Stronger\ ļ\ by\ Duncan\ Wick.ttf");
+  src: url("../../../public/punkboy_tbs.ttf");
 }
 @font-face {
   font-family: "helsinki";
@@ -185,6 +185,10 @@ input {
   font-size: large;
   max-width: fit-content;
   padding: 5px;
+}
+
+.search-container {
+  margin-left: 50px;
 }
 
 .test {

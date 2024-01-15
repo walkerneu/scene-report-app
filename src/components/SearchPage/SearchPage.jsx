@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { DatePicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+import Card from '@mui/material/Card';
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -41,10 +41,25 @@ function SearchPage() {
   console.log("Time Query:", timeQuery)
   return (
     <>
-      <div className="search-container">
-        <div className="search-box">
+      <Card 
+        sx={{ 
+            maxWidth: 800,
+            backgroundColor: "#2e2e2e", 
+            color: "antiquewhite", 
+            outline: "#e6855f solid 10px",
+            ml: 10,
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center'
+            }}>
+          <Typography gutterBottom variant="h4" component="div" mt={5} fontFamily={"helsinki"}>
+            Search for Events!
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div" fontFamily={"helsinki"}>
+            Use any or all criteria, or click "Show All Events" to view all upcoming events
+          </Typography>
           <Typography gutterBottom variant="overline" display="block" mt={3}>
-            Search for Events by keyword:
+            Search by keyword:
           </Typography>
           <TextField
             label="Search by Title"
@@ -52,8 +67,6 @@ function SearchPage() {
             onChange={(event) => setSearchQuery(event.target.value)}
             value={searchQuery}
           />
-        </div>
-        <div className="search-box">
           <Typography gutterBottom variant="overline" display="block">
             Search By Genre:
           </Typography>
@@ -84,6 +97,7 @@ function SearchPage() {
             variant="contained"
             color="secondary"
             onClick={submitSearch}
+            sx={{mt: 3}}
           >
             SEARCH
           </Button>
@@ -93,12 +107,12 @@ function SearchPage() {
             variant="contained"
             color="secondary"
             onClick={searchAll}
+            sx={{mt: 6}}
           >
             Show All Events
           </Button>
         </p>
-        </div>
-      </div>
+      </Card>
     </>
   );
 }
