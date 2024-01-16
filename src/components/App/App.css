@@ -257,6 +257,12 @@ input {
   margin-left: 15px;
 }
 
+.comment-item-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .test {
   color:#e6855f
 }

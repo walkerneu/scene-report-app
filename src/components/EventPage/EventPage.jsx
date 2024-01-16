@@ -221,6 +221,7 @@ function EventPage(){
         <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Location:
         </Typography>
+        <CardActionArea sx={{mb: 4, mt: 1}}>
         <Typography 
             variant="h5" 
             fontFamily="helsinki"
@@ -231,6 +232,12 @@ function EventPage(){
               }>
         {event.venue}, {event.location}
         </Typography>
+        <Typography
+            fontFamily="helsinki"
+            variant="h7">
+            Click to open in Google Maps!
+        </Typography>
+        </CardActionArea>
         <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Time:
         </Typography>

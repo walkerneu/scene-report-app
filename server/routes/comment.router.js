@@ -44,4 +44,21 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
+    const query = `
+          DELETE FROM "comments"
+            WHERE 
+            "id"=$1
+      `;
+    pool
+    .query(query, [req.params.id])
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log("Error in comment router POST comment", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

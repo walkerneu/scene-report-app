@@ -18,6 +18,22 @@ function* addComment(action){
         console.log("Error in Saga add comment", error);
     }
 }
+
+function* deleteComment(action){
+    try {
+        const response = yield axios({
+            method: "DELETE",
+            url: `/api/comments/delete/${action.payload}`
+        })
+        yield put({
+            type: "SAGA/GET_COMMENTS",
+            payload: action.payload
+        })
+    } catch (error) {
+        console.log("Error in Saga delete comment", error)
+    }
+}
+
 function* getComments(action){
     try {
         const response = yield axios({
@@ -37,6 +53,7 @@ function* getComments(action){
 function* commentsSaga() {
    yield takeLatest ('SAGA/ADD_COMMENT', addComment);
    yield takeLatest ('SAGA/GET_COMMENTS', getComments);
+   yield takeLatest ('SAGA/DELETE_COMMENT', deleteComment);
   }
   
   export default commentsSaga;
