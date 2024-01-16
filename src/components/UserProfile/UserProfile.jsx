@@ -78,9 +78,9 @@ function UserProfile() {
           >
             {currentUser && currentUser.username}
           </Typography>
-          <Typography variant="body">Bio:</Typography>
+          <Typography className='info-text' variant="h6">Bio:</Typography>
           <p>
-            <Typography variant="body">
+            <Typography variant="h5">
               {currentUser && currentUser.bio}
             </Typography>
           </p>

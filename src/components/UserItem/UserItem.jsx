@@ -12,7 +12,7 @@ function UserItem ({ attendee }){
     }
     return (  
     <Card sx={{ 
-            maxWidth: 183,
+            maxWidth: 400,
             width: 1200, 
             display: "flex", 
             flexDirection: "row", 
@@ -24,15 +24,16 @@ function UserItem ({ attendee }){
             }} 
         onClick={imgClick}>
       <CardActionArea>
+        <div className="event-item">
         <img
           className="item-img"
-          width={150}
           src={attendee.profile_picture}
           alt={attendee.username}
         />  
           <Typography gutterBottom variant="h5" component="div">
             {attendee.username}
           </Typography>
+          </div>
       </CardActionArea>
     </Card>
     )
