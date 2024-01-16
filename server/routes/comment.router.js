@@ -56,7 +56,7 @@ router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log("Error in comment router POST comment", err);
+      console.log("Error in comment router DELETE comment", err);
       res.sendStatus(500);
     });
 });

@@ -40,7 +40,7 @@ router.get('/event/:id', (req, res) => {
         console.log("Event by ID genres:", result.rows);
       })
       .catch(err => {
-        console.log('Error in genres router GET all:', err);
+        console.log('Error in genres router GET event genres:', err);
         res.sendStatus(500)
       })
   });

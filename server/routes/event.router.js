@@ -96,7 +96,7 @@ pool
     console.log("user attendance from event router:", result.rows);
     })
     .catch((err) => {
-    console.log("Error in event router GET user events:", err);
+    console.log("Error in event router GET user attendance:", err);
     res.sendStatus(500);
     });
 });
@@ -161,7 +161,7 @@ router.delete("/remove/:id", rejectUnauthenticated, (req, res) => {
         res.sendStatus(200);
       })
       .catch((err) => {
-        console.log("Error in event router POST attendance", err);
+        console.log("Error in event router DELETE attendance", err);
         res.sendStatus(500);
       });
   });

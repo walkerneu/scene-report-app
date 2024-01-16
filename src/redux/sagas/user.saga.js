@@ -73,10 +73,11 @@ function* updateUserProfile(action){
     const response = yield axios({
       method: "PUT",
       url: `/api/user/update`,
-      data: action.payload
+      data: action.payload.data
     })
     yield put ({
-      type: 'FETCH_USER'
+      type: 'SAGA/GET_CURRENT_USER',
+      payload: action.payload.id
     })
   } catch (error) {
     console.log('Grum! The Saga updateUserProfile failed', error)

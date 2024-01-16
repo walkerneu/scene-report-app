@@ -31,7 +31,7 @@ function EditProfile() {
     profileForm.append("social_media_link", socialMediaLink)
     dispatch({
       type: "SAGA/UPDATE_PROFILE",
-      payload: profileForm
+      payload: { data: profileForm, id: user.id }
     });
     history.push(`/user/${user.id}`);
   };

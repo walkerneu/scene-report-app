@@ -76,7 +76,7 @@ router.put('/update', rejectUnauthenticated, cloudinaryUpload.single("image"), a
     .query(queryText, queryValues)
     .then(() => res.sendStatus(201))
     .catch((err) => {
-      console.log('User registration failed: ', err);
+      console.log('Error in user router PUT update: ', err);
       res.sendStatus(500);
     });
 });
