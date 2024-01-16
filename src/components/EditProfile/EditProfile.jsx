@@ -17,7 +17,7 @@ function EditProfile() {
   const profileForm = new FormData ();
   
   const cancelSubmission = () => {
-    history.goBack();
+    history.replace(`/user/${user.id}`);
   };
   const updateProfile = () => {
     if(profilePicture === ''){

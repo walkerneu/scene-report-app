@@ -105,6 +105,9 @@ function EventPage(){
     const goToCreator = () => {
         history.push(`/user/${host.id}`);
       };
+    const openInNewTab = (url) => {
+        window.open(url, "_blank", "noreferrer");
+      };
     const deleteEvent = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -218,7 +221,14 @@ function EventPage(){
         <Typography className='info-text' variant="h5" fontFamily="helsinki">
           Location:
         </Typography>
-        <Typography variant="h5" fontFamily="helsinki">
+        <Typography 
+            variant="h5" 
+            fontFamily="helsinki"
+            onClick={() =>
+                openInNewTab(
+                  `https://www.google.com/maps/search/?api=1&query=${event.venue}${event.location}`
+                )
+              }>
         {event.venue}, {event.location}
         </Typography>
         <Typography className='info-text' variant="h5" fontFamily="helsinki">

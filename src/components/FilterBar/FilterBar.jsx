@@ -10,14 +10,15 @@ import Card from '@mui/material/Card';
 function FilterBar(){
   const dispatch = useDispatch();
   const history = useHistory();
-  useEffect(() => {
-    dispatch({ type: "SAGA/GET_GENRES" });
-  }, []);
   const currentQuery = useSelector(store => store.currentQuery)
-  const genres = useSelector(store => store.genres);
   const [searchQuery, setSearchQuery] = useState(currentQuery.query);
   const [genreQuery, setGenreQuery] = useState(Number(currentQuery.genre));
-  const [timeQuery, setTimeQuery] = useState(currentQuery.time);
+  const [timeQuery, setTimeQuery] = useState(null);
+  useEffect(() => {
+    dispatch({ type: "SAGA/GET_GENRES" });
+    setTimeQuery(currentQuery.time);
+  }, []);
+  const genres = useSelector(store => store.genres);
   const submitSearch = () => {
     let time = ''
     if (timeQuery !== null){
@@ -31,6 +32,7 @@ function FilterBar(){
         time: time}
     });
   };
+  console.log("current query:", currentQuery)
     return (
         <div className="filter-bar">
             <div className="filter-input">

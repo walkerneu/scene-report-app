@@ -49,7 +49,7 @@ function EditEvent() {
     setVenue('');
     setCityState('');
     setSelectedGenre([]);
-    history.goBack();
+    history.replace(`/event/${id}`);
   };
 
   const editEvent = () => {
