@@ -35,7 +35,8 @@ router.get('/', async (req, res) => {
     "description" ILIKE $1
     OR 
     "venue" ILIKE $1) 
-    AND "events"."event_time" > NOW();
+    AND "events"."event_time" > NOW()
+    ORDER BY "events"."event_time";
     `
     const textResult = await connection.query(textQuery, [`%${req.query.query}%`])    
     eventArray = textResult.rows
@@ -56,7 +57,8 @@ router.get('/', async (req, res) => {
     ON "events"."id"="events_genres"."event_id"
     JOIN "genres"
     ON "events_genres"."genre_id"="genres"."id"
-    WHERE "genres"."id"=$1 AND "events"."event_time" > NOW();
+    WHERE "genres"."id"=$1 AND "events"."event_time" > NOW()
+    ORDER BY "events"."event_time";
     `
     const genreResult = await connection.query(genreQuery, [req.query.genre])
     eventArray = genreResult.rows
@@ -65,7 +67,8 @@ router.get('/', async (req, res) => {
     const timeQuery = `
     SELECT * FROM "events"
         WHERE 
-        to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY');
+        to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY')
+        ORDER BY "event_time";
     `
     const timeResult = await connection.query(timeQuery)
     eventArray = timeResult.rows
@@ -95,7 +98,8 @@ router.get('/', async (req, res) => {
     AND 
     "genres"."id"=$2 
     AND 
-    "events"."event_time" > NOW();
+    "events"."event_time" > NOW()
+    ORDER BY "events"."event_time";
     `
     const textGenreResult = await connection.query(textGenreQuery, [`%${req.query.query}%`, req.query.genre])
     eventArray = textGenreResult.rows
@@ -111,7 +115,8 @@ router.get('/', async (req, res) => {
     OR 
     "venue" ILIKE $1)
     AND 
-    to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY');
+    to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY')
+    ORDER BY "event_time";
     `
     const textTimeResult = await connection.query(textTimeQuery, [`%${req.query.query}%`])
     eventArray = textTimeResult.rows
@@ -134,7 +139,8 @@ router.get('/', async (req, res) => {
     ON "events_genres"."genre_id"="genres"."id"
     WHERE "genres"."id"=$1
     AND 
-    to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY');
+    to_char("event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY')
+    ORDER BY "events"."event_time";
     `
     const genreTimeResult = await connection.query(genreTimeQuery, [req.query.genre])
     eventArray = genreTimeResult.rows
@@ -164,7 +170,8 @@ router.get('/', async (req, res) => {
     AND 
     "genres"."id"=$2 
     AND 
-    to_char("events"."event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY');
+    to_char("events"."event_time", 'MM/DD/YYYY') = to_char(timestamp '${req.query.time}', 'MM/DD/YYYY')
+    ORDER BY "events"."event_time";
     `
     const fullResult = await connection.query(fullQuery, [`%${req.query.query}%`, req.query.genre])
     eventArray = fullResult.rows
@@ -185,7 +192,8 @@ router.get('/', async (req, res) => {
 router.get('/all', (req, res) => {
     const query = `
     SELECT * FROM "events"
-    WHERE "events"."event_time" > NOW();
+    WHERE "event_time" > NOW()
+    ORDER BY "event_time";
     `
     pool.query(query)
         .then((result) => {

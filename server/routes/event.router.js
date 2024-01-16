@@ -37,7 +37,8 @@ router.get("/user/:id", rejectUnauthenticated, (req, res) => {
         FROM "events"
         JOIN "attendance"
             ON "events"."id"="attendance"."event_id"
-        WHERE "attendance"."user_id" = $1 AND "events"."event_time" > NOW();
+        WHERE "attendance"."user_id" = $1 AND "events"."event_time" > NOW()
+        ORDER BY "events"."event_time";
     `;
   pool
     .query(query, [req.user.id])
@@ -54,7 +55,8 @@ router.get("/user/:id", rejectUnauthenticated, (req, res) => {
 router.get("/user/all/:id", (req, res) => {
     const query = `
         SELECT * FROM "events"
-          WHERE "creator_id"=$1;
+          WHERE "creator_id"=$1
+          ORDER BY "event_time";
       `;
     pool
       .query(query, [req.params.id])
@@ -87,7 +89,8 @@ const query = `
             AND 
             "events"."event_time" > NOW()
             AND
-            "events"."creator_id" != $1;
+            "events"."creator_id" != $1
+            ORDER BY "events"."event_time";
     `;
 pool
     .query(query, [req.params.id])

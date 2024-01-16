@@ -56,7 +56,7 @@ function FilterBar(){
             label="genre"
             onChange={(event) => setGenreQuery(event.target.value)}
           >
-            <MenuItem>-</MenuItem>
+            <MenuItem value=''> - </MenuItem>
             {genres.map((genre) => (
               <MenuItem key={genre.id} value={genre.id}>
                 {genre.genre_name}
