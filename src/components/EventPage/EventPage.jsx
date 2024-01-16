@@ -133,6 +133,7 @@ function EventPage(){
           });
     }
     const goToGenre = (genreId) => {
+        console.log("genreId", genreId)
         dispatch({
             type: 'SAGA/GET_SEARCH',
             payload: {

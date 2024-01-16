@@ -22,6 +22,10 @@ function RegisterForm() {
       },
     });
   }; // end registerUser
+  const autoFill = () => {
+    setUsername('MarcosTheGOAT');
+    setPassword('marcos');
+  }
 
   return (
     <>
@@ -36,7 +40,7 @@ function RegisterForm() {
           alignItems: 'center'
           }}>
     <form className="form-control" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2>Register <span onClick={autoFill}>User</span></h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}

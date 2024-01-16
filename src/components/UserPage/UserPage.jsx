@@ -19,7 +19,10 @@ function UserPage() {
   const now = new Date ();
   const msPerDay = 24 * 60 * 60 * 1000;
   const goToSearch = () => {
-    history.push('/search')
+    dispatch({
+      type: "SAGA/GET_ALL_EVENTS"
+    });
+    history.push("/searchResults");
   }
 
   const homeDisplay = () => {

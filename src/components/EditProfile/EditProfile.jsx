@@ -49,7 +49,7 @@ function EditProfile() {
         }}
     >
       <Typography gutterBottom variant="h4" component="div" mt={5}>
-        Edit You Profile!
+        Edit Your Profile!
       </Typography>
       <p>
         <Typography gutterBottom variant="overline" display="block">
